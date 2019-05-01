@@ -1,0 +1,16 @@
+$text-color: #232323 !default;
+$max-width: 980px !default;
+
+$breakpoints: (
+  'xs': 'screen and (max-width: 321px)',
+  'sm': 'screen and (max-width: 480px)',
+  'blog': 'screen and (max-width: 800px)',
+  'md': 'screen and (max-width: 980px)',
+  'lg': 'screen and (max-width: 1100px)'
+) !default;
+
+@mixin mq($breakpoint: md) {
+  @media #{map-get($breakpoints, $breakpoint)} {
+    @content
+  }
+}
