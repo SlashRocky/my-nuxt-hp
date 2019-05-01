@@ -5,15 +5,18 @@
         <Canvas />
       </div>
     </header>
+    <Nav />
   </div>
 </template>
 
 <script>
 import Canvas from '~/components/index/Canvas.vue'
+import Nav from '~/components/common/Nav.vue'
 
 export default {
   components: {
-    Canvas
+    Canvas,
+    Nav
   }
 }
 </script>
