@@ -1,4 +1,3 @@
-import pkg from './package'
 const resolve = require('path').resolve
 
 export default {
@@ -8,19 +7,27 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: pkg.name,
+    title: 'MasaakiTodoroki.me - 川崎市在住のフロントエンドエンジニア',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { name: 'theme-color', content: '#ffffff' },
+      { property: 'og:locale', content: 'ja_JP' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/earlyaccess/notosansjp.css' },
+    ]
   },
 
   /*
    ** Customize the progress-bar color
    */
   loading: { color: '#fff' },
+  router: {
+    linkActiveClass: 'is-current'
+  },
 
   /*
    ** Global CSS
@@ -72,5 +79,16 @@ export default {
         })
       }
     }
+  },
+  manifest: {
+    name: 'MasaakiTodoroki.me',
+    short_name: 'MT',
+    title: 'MasaakiTodoroki.me',
+    'og:title': 'MasaakiTodoroki.me',
+    description: '川崎市在住のフロントエンドエンジニア',
+    'og:description': '川崎市在住のフロントエンドエンジニア',
+    lang: 'ja',
+    theme_color: '#ffffff',
+    background_color: '#ffffff'
   }
 }
