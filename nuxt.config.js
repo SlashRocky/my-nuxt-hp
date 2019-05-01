@@ -1,4 +1,5 @@
 import pkg from './package'
+const resolve = require('path').resolve
 
 export default {
   mode: 'universal',
@@ -36,13 +37,21 @@ export default {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/style-resources'
   ],
   /*
    ** Axios module configuration
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+  },
+  /*
+   ** style-resources module configuration
+   */
+  styleResources: {
+    // See https://github.com/nuxt-community/style-resources-module
+    scss: [resolve(__dirname, 'assets/scss/vars.scss')]
   },
 
   /*
