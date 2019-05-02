@@ -17,7 +17,17 @@
             <img src="~assets/img/profile-cut.png" />
           </div>
         </div>
+        <div class="profile__bottom">
+          <div class="profile__name">
+            <LogoTxt />
+          </div>
+        </div>
+        <div class="profile__jp-name">
+          <h2 id="profileJpName">轟 政明</h2>
+          <span id="profileJpNameBk"></span>
+        </div>
       </div>
+      <ScrollDown />
     </header>
   </div>
 </template>
@@ -25,11 +35,13 @@
 <script>
 import Nav from '~/components/common/Nav.vue'
 import Logo from '~/components/common/Logo.vue'
+import ScrollDown from '~/components/common/ScrollDown.vue'
 
 export default {
   components: {
     Nav,
-    Logo
+    Logo,
+    ScrollDown
   }
 }
 </script>
