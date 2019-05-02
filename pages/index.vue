@@ -40,6 +40,31 @@
         </ul>
       </div>
     </header>
+    <main class="main">
+      <div class="logo">
+        <LogoTxt />
+        <div id="logoDescription" class="logo__description">
+          <p>
+            <span
+              v-for="(text, key) in '川崎在住の'"
+              :key="`address-text-${key}`"
+              class="logo__description-l01"
+            >
+              {{ text }}
+            </span>
+          </p>
+          <p>
+            <span
+              v-for="(text, key) in 'フロントエンドエンジニア'"
+              :key="`profession-text-${key}`"
+              class="logo__description-l02"
+            >
+              {{ text }}
+            </span>
+          </p>
+        </div>
+      </div>
+    </main>
   </div>
 </template>
 
@@ -49,6 +74,7 @@ import Nav from '~/components/common/Nav.vue'
 import IconFb from '~/components/icons/fb.vue'
 import IconTw from '~/components/icons/tw.vue'
 import IconGithub from '~/components/icons/github.vue'
+import LogoTxt from '~/components/common/LogoTxt.vue'
 
 export default {
   components: {
@@ -56,7 +82,8 @@ export default {
     Nav,
     IconFb,
     IconTw,
-    IconGithub
+    IconGithub,
+    LogoTxt
   }
 }
 </script>
