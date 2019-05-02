@@ -18,6 +18,16 @@
             <span class="bk"></span>
           </a>
         </li>
+        <li class="sns__list tw">
+          <a
+            href="https://twitter.com/Slash_Rocky"
+            target="_blank"
+            class="sns__link"
+          >
+            <IconTw />
+            <span class="bk"></span>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
@@ -27,12 +37,14 @@
 import Canvas from '~/components/index/Canvas.vue'
 import Nav from '~/components/common/Nav.vue'
 import IconFb from '~/components/icons/fb.vue'
+import IconTw from '~/components/icons/tw.vue'
 
 export default {
   components: {
     Canvas,
     Nav,
-    IconFb
+    IconFb,
+    IconTw
   }
 }
 </script>
