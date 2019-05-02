@@ -3,6 +3,21 @@
     <header class="header">
       <Nav />
       <Logo />
+      <div class="profile">
+        <div class="profile__top">
+          <div
+            id="profileCircle01"
+            class="profile__circle profile__ciecle01"
+          ></div>
+          <div
+            id="profileCircle02"
+            class="profile__circle profile__circle02"
+          ></div>
+          <div id="profilePicture" class="profile__picture">
+            <img src="~assets/img/profile-cut.png" />
+          </div>
+        </div>
+      </div>
     </header>
   </div>
 </template>
