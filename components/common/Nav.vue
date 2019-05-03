@@ -1,9 +1,19 @@
 <template>
-  <div></div>
+  <div class="nav">
+    <div id="navMask" class="nav__mask">
+      <LogoNav />
+    </div>
+  </div>
 </template>
 
 <script>
-export default {}
+import LogoNav from '~/components/common/LogoNav'
+
+export default {
+  components: {
+    LogoNav
+  }
+}
 </script>
 
 <style lang="scss" scoped></style>
