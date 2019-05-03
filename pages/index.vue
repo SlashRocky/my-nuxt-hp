@@ -46,7 +46,7 @@
         <div id="logoDescription" class="logo__description">
           <p>
             <span
-              v-for="(text, key) in '川崎在住の'"
+              v-for="(text, key) in '川崎市在住の'"
               :key="`address-text-${key}`"
               class="logo__description-l01"
             >
@@ -88,4 +88,109 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+#pageIndex {
+  max-width: 100%;
+  min-height: 100%;
+  height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.sns {
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+  @include mq() {
+    right: 1rem;
+    bottom: 1rem;
+  }
+  ul {
+    height: 1.5rem;
+    li {
+      display: inline-block;
+      margin-right: 1rem;
+      position: relative;
+      overflow-x: hidden;
+      overflow-y: hidden;
+      a {
+        display: block;
+        height: 1.5rem;
+        svg {
+          fill: $text-color;
+          height: 1.5rem;
+          transition: all 0.4s;
+          opacity: 1;
+        }
+        span.bk {
+          display: block;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          background: $text-color;
+        }
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+      &.fb {
+        a {
+          svg {
+            &:hover {
+              fill: #3b5998;
+            }
+          }
+        }
+      }
+      &.tw {
+        a {
+          svg {
+            &:hover {
+              fill: #1daaf2;
+            }
+          }
+        }
+      }
+      &.github {
+        a {
+          svg {
+            &:hover {
+              fill: #1a1414;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.logo {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 2rem;
+  @include mq() {
+    left: 1rem;
+  }
+  svg {
+    width: 360px;
+    margin-bottom: 0.5rem;
+    @include mq() {
+      width: 225px;
+    }
+  }
+  .logo__description {
+    font-size: 14px;
+    line-height: 1.7;
+    @include mq() {
+      font-size: 12px;
+    }
+    p {
+      span {
+        opacity: 1;
+      }
+    }
+  }
+}
+</style>
