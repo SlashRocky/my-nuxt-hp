@@ -15,15 +15,18 @@
         </span>
       </p>
     </div>
+    <ScrollTop />
   </footer>
 </template>
 
 <script>
 import IconHeart from '~/components/icons/heart.vue'
+import ScrollTop from '~/components/common/ScrollTop.vue'
 
 export default {
   components: {
-    IconHeart
+    IconHeart,
+    ScrollTop
   }
 }
 </script>
