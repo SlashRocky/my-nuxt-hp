@@ -7,7 +7,7 @@
         <div class="profile__top">
           <div
             id="profileCircle01"
-            class="profile__circle profile__ciecle01"
+            class="profile__circle profile__circle01"
           ></div>
           <div
             id="profileCircle02"
@@ -39,14 +39,13 @@
           <div id="aboutSectionTitle" class="section__title">
             <div class="section__container section__container01">
               <h2 class="section__en jos">
-                <div class="bk">
-                  <span
-                    v-for="(text, key) in 'Profile'"
-                    :key="`profile-text-en-${key}`"
-                  >
-                    {{ text }}
-                  </span>
-                </div>
+                <div class="bk"></div>
+                <span
+                  v-for="(text, key) in 'Profile'"
+                  :key="`profile-text-en-${key}`"
+                >
+                  {{ text }}
+                </span>
               </h2>
             </div>
             <div class="section__container section__container02">
@@ -83,7 +82,7 @@
                   {{ text }}
                 </span>
                 <span
-                  v-for="(text, key) in 'Frontend'"
+                  v-for="(text, key) in 'FrontEnd'"
                   :key="`frontend-text-${key}`"
                 >
                   {{ text }}
@@ -97,7 +96,7 @@
               </h3>
               <div class="section__description">
                 <p>
-                  1980年生まれ埼玉県上尾市出身神奈川県川崎市在住、フロントエンドエンジニア。
+                  1980年生まれ、埼玉県上尾市出身、神奈川県川崎市在住、フロントエンドエンジニア。
                   <br class="pc" />
                 </p>
               </div>
@@ -266,17 +265,508 @@
 <script>
 import Nav from '~/components/common/Nav.vue'
 import Logo from '~/components/common/Logo.vue'
+import LogoTxt from '~/components/common/LogoTxt.vue'
 import ScrollDown from '~/components/common/ScrollDown.vue'
+import IconFb from '~/components/icons/fb.vue'
+import IconTw from '~/components/icons/tw.vue'
+import IconGithub from '~/components/icons/github.vue'
 import Footer from '~/components/common/Footer.vue'
 
 export default {
   components: {
     Nav,
     Logo,
+    LogoTxt,
+    IconFb,
+    IconTw,
+    IconGithub,
     ScrollDown,
     Footer
   }
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+header.header {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  .profile {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    .profile__top {
+      width: 266px;
+      height: 266px;
+      position: relative;
+      margin-bottom: 1rem;
+      .profile__circle {
+        width: 256px;
+        height: 256px;
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 1;
+        transition: all 3s;
+        transition-delay: 1s;
+        &.profile__circle01 {
+          animation: circle 5s ease-out infinite;
+          background: rgba(234, 234, 234, 0.8);
+          z-index: 1;
+        }
+        &.profile__circle02 {
+          animation: circle 5s ease-in infinite;
+          background: rgba(247, 247, 247, 0.8);
+          z-index: 2;
+        }
+      }
+      .profile__picture {
+        opacity: 1;
+        transition: all 1s;
+        img {
+          width: 216px;
+          height: 216px;
+          display: block;
+          position: absolute;
+          z-index: 3;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          animation: imgProfile 5s ease-in infinite;
+        }
+      }
+    }
+    .profile__bottom {
+      .profile__name {
+        svg {
+          width: 216px;
+          display: block;
+          margin: 0 auto;
+        }
+      }
+    }
+    .profile__jp-name {
+      position: absolute;
+      right: -6rem;
+      top: -6rem;
+      z-index: 5;
+      overflow: hidden;
+      @include mq() {
+        right: -2rem;
+        top: -2rem;
+        width: 41px;
+        display: none;
+      }
+      h2 {
+        font-size: 64px;
+        color: #efefef;
+        writing-mode: vertical-rl;
+        font-weight: 200;
+        opacity: 1;
+        @include mq() {
+          font-weight: 32px;
+        }
+      }
+      span {
+        background: #eaeaea;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    }
+  }
+}
+
+main.main {
+  position: relative;
+  margin-bottom: 10rem;
+  @include mq() {
+    margin-bottom: 5rem;
+  }
+  .section-line {
+    width: 0%;
+    height: 10rem;
+    background: #eaeaea;
+    margin-left: -10%;
+    @include mq() {
+      height: 7rem;
+    }
+  }
+  section.section {
+    margin-top: -2rem;
+    margin-bottom: 4rem;
+    position: relative;
+    @include mq() {
+      padding: 0 1rem;
+      margin-bottom: 2rem;
+    }
+    .section__inner {
+      max-width: 980px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      .section__title {
+        margin-bottom: 4rem;
+        @include mq() {
+          margin-bottom: 2rem;
+        }
+        h2.section__en.jos {
+          font-size: 4rem;
+          letter-spacing: -8px;
+          margin-bottom: 0.5rem;
+          line-height: 1.1;
+          display: inline-block;
+          overflow: hidden;
+          position: relative;
+          width: 197px;
+          @include mq() {
+            font-size: 4rem;
+            margin-bottom: 0;
+          }
+          &:after {
+            content: '';
+            clear: both;
+            display: table;
+          }
+          .bk {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: $text-color;
+          }
+          span {
+            opacity: 1;
+          }
+        }
+        h2.section__jp {
+          font-size: 14px;
+          margin: 0;
+          display: inline-block;
+          overflow: hidden;
+          position: relative;
+          .bk {
+            position: relative;
+            top: 0;
+            left: 0;
+            background: $text-color;
+          }
+          span {
+            opacity: 1;
+          }
+        }
+      }
+      .section__content {
+        position: relative;
+        &:last-child {
+          .section__txt {
+            padding-bottom: 0;
+          }
+        }
+        .section__line {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          &:before {
+            content: '';
+            width: 1px;
+            height: 100%;
+            transition: height 1s ease-out 1.5s;
+            background: $text-color;
+            position: absolute;
+            top: 1px;
+            left: 6.5px;
+          }
+          svg {
+            width: 1rem;
+            height: 1rem;
+            transform: rotate(-90deg);
+            vertical-align: top;
+          }
+        }
+        .section__txt {
+          padding-left: 4rem;
+          padding-bottom: 3rem;
+          @include mq() {
+            padding-left: 2rem;
+            padding-bottom: 3rem;
+          }
+          h3 {
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            line-height: 1;
+            @include mq() {
+              margin-bottom: 1.5rem;
+            }
+            span {
+              opacity: 1;
+              display: inline-block;
+            }
+          }
+          .section__description {
+            opacity: 1;
+            transition: 2s opacity ease-in;
+            ul.sns-lists {
+              height: 1.5rem;
+              padding: 0 0 1px;
+              margin: 0;
+              li {
+                display: inline-block;
+                margin-right: 1.5rem;
+                overflow-y: hidden;
+                a {
+                  display: block;
+                  height: 1.5rem;
+                  svg {
+                    fill: $text-color;
+                    height: 1.5rem;
+                    transition: all 0.4s;
+                  }
+                }
+                &:last-child {
+                  margin-right: 0;
+                }
+                &.fb {
+                  a {
+                    svg {
+                      &:hover {
+                        fill: #3b5998;
+                      }
+                    }
+                  }
+                }
+                &.tw {
+                  a {
+                    svg {
+                      &:hover {
+                        fill: #1da1f2;
+                      }
+                    }
+                  }
+                }
+                &.github {
+                  a {
+                    svg {
+                      &:hover {
+                        fill: #1a1414;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+            p {
+              margin-bottom: 1.25rem;
+              @include mq() {
+                margin-bottom: 1rem;
+                br.pc {
+                  display: none;
+                }
+              }
+              &:last-child {
+                margin-bottom: 0;
+              }
+            }
+            a {
+              text-decoration: underline;
+              &:hover {
+                text-decoration: none;
+              }
+            }
+            table {
+              border-collapse: collapse;
+              width: 100%;
+              font-size: 15px;
+              tbody {
+                tr {
+                  &:first-child {
+                    th {
+                      padding: 0 0.75rem 1.5rem 0;
+                      @include mq() {
+                        padding: 0;
+                      }
+                    }
+                    td {
+                      padding: 0 0 1.5rem 0.75rem;
+                      @include mq() {
+                        padding: 0 0 1rem 0;
+                      }
+                    }
+                  }
+                  th {
+                    font-weight: 400;
+                    padding: 1.5rem 0.75rem 1.5rem 0;
+                    border-bottom: 1px solid #eaeaea;
+                    text-align: right;
+                    vertical-align: top;
+                    width: 10rem;
+                    @include mq() {
+                      font-weight: 500;
+                      display: block;
+                      text-align: left;
+                      width: 100%;
+                      border-bottom: none;
+                      padding: 1rem 0 0 0;
+                    }
+                    &.mg {
+                      @include mq() {
+                        margin-bottom: 1rem;
+                      }
+                    }
+                  }
+                  td {
+                    padding: 1.5rem 0 1.5rem 0.75rem;
+                    border-bottom: 1px solid #eaeaea;
+                    @include mq() {
+                      display: block;
+                      text-align: left;
+                      width: 100%;
+                      padding: 0 0 1rem 0;
+                    }
+                    p.skill-title {
+                      position: relative;
+                      font-weight: 400;
+                      margin: 0 0 5px;
+                      line-height: 1.7;
+                      padding-left: 1.2rem;
+                      &:before {
+                        content: '';
+                        margin: 0;
+                        width: 10px;
+                        height: 1px;
+                        background: #232323;
+                        display: block;
+                        position: absolute;
+                        top: 12px;
+                        left: 0;
+                      }
+                    }
+                    ul.normal {
+                      margin: 0 0 1.25rem;
+                      list-style: none;
+                      padding: 0;
+                      @include mq() {
+                        margin: 0 0 1rem;
+                      }
+                      &:last-child {
+                        margin-bottom: 0;
+                      }
+                      li {
+                        padding-left: 1.2rem;
+                        line-height: 1.7;
+                        position: relative;
+                        &:before {
+                          content: '';
+                          margin: 0;
+                          width: 10px;
+                          height: 1px;
+                          background: $text-color;
+                          display: block;
+                          position: absolute;
+                          top: 12px;
+                          left: 0;
+                        }
+                      }
+                    }
+                    ul.slash {
+                      margin: 0 0 1.25rem;
+                      list-style: none;
+                      padding: 0;
+                      @include mq() {
+                        margin: 0 0 1rem;
+                      }
+                      &:last-child {
+                        margin-bottom: 0;
+                      }
+                      li {
+                        display: inline-block;
+                        position: relative;
+                        @include mq() {
+                          display: block;
+                          padding-left: 1.2rem;
+                          line-height: 1.7;
+                        }
+                        &:first-child {
+                          &:before {
+                            content: none;
+                            @include mq() {
+                              content: '';
+                            }
+                          }
+                        }
+                        &:before {
+                          content: '/';
+                          margin: 0 0.5rem 0 0.5rem;
+                          @include mq() {
+                            content: '';
+                            margin: 0;
+                            width: 10px;
+                            height: 1px;
+                            background: $text-color;
+                            display: block;
+                            position: absolute;
+                            top: 12px;
+                            left: 0;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes circle {
+  0% {
+    transform: rotate(0deg) translate(0, 0);
+  }
+  12.5% {
+    transform: rotate(0.4deg) translate(10px, -10px);
+  }
+  25% {
+    transform: rotate(0.8deg) translate(0, 10px);
+  }
+  37.5% {
+    transform: rotate(0.4deg) translate(-10px, 0);
+  }
+  50% {
+    transform: rotate(0deg) translate(0, 0);
+  }
+  62.5% {
+    transform: rotate(-0.4deg) translate(10px, 0);
+  }
+  75% {
+    transform: rotate(-0.8deg) translate(0, 10px);
+  }
+  87.5% {
+    transform: rotate(-0.4deg) translate(-10px, -10px);
+  }
+  100% {
+    transform: rotate(0deg) translate(0, 0);
+  }
+}
+
+@keyframes imgProfile {
+  0% {
+    mix-blend-mode: multiply;
+    filter: grayscale(0);
+  }
+  50% {
+    mix-blend-mode: multiply;
+    filter: grayscale(100%);
+  }
+  100% {
+    mix-blend-mode: multiply;
+    filter: grayscale(0);
+  }
+}
+</style>
