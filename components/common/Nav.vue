@@ -61,7 +61,7 @@
         </ul>
       </nav>
     </div>
-    <button class="nav__button">
+    <button id="navButton" class="nav__button" @click="click">
       <span class="nav__button__line">
         <span class="nav__button__line__grad"></span>
       </span>
@@ -78,10 +78,21 @@
 
 <script>
 import LogoNav from '~/components/common/LogoNav'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   components: {
     LogoNav
+  },
+  computed: {
+    ...mapGetters({
+      openedNav: 'openedNav'
+    })
+  },
+  methods: {
+    ...mapMutations({
+      click: 'click'
+    })
   }
 }
 </script>
