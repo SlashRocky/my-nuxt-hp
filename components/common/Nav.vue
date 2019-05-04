@@ -86,7 +86,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      openedNav: 'openedNav'
+      openedNav: 'openedNav',
+      loadedIndex: 'loadedIndex'
     })
   },
   methods: {
