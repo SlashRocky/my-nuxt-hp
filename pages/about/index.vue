@@ -271,6 +271,7 @@ import IconFb from '~/components/icons/fb.vue'
 import IconTw from '~/components/icons/tw.vue'
 import IconGithub from '~/components/icons/github.vue'
 import Footer from '~/components/common/Footer.vue'
+import { mapMutations } from 'vuex'
 
 export default {
   components: {
@@ -282,6 +283,18 @@ export default {
     IconGithub,
     ScrollDown,
     Footer
+  },
+  mounted() {
+    this.setLoadedAbout()
+  },
+  destroyed() {
+    this.setUnLoadedAbout()
+  },
+  methods: {
+    ...mapMutations({
+      setLoadedAbout: 'setLoadedAbout',
+      setUnLoadedAbout: 'setUnLoadedAbout'
+    })
   }
 }
 </script>
