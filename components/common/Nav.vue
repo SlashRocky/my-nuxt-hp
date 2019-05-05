@@ -1,25 +1,25 @@
 <template>
   <div class="nav">
-    <div id="navMask" class="nav__mask">
+    <div id="navMask" class="nav__mask" :class="{ 'is-active': openedNav }">
       <LogoNav />
       <span v-for="n in 8" :key="`nav-mask-line=${n}`" class="nav__mask__line">
       </span>
-      <span class="nav__mask-around-line nav__mask__around-line--01">
+      <span class="nav__mask__around-line nav__mask__around-line--01">
         <span class="nav__mask__around-line__grad"></span>
       </span>
-      <span class="nav__mask__around-line nav__mask-around-line--02">
+      <span class="nav__mask__around-line nav__mask__around-line--02">
         <span class="nav__mask__around-line__grad"></span>
       </span>
-      <span class="nav__mask__around-line nav__mask-around-line--03">
+      <span class="nav__mask__around-line nav__mask__around-line--03">
         <span class="nav__mask__around-line__grad"></span>
       </span>
-      <span class="nav__mask__around-line nav__mask-around-line--04">
+      <span class="nav__mask__around-line nav__mask__around-line--04">
         <span class="nav__mask__around-line__grad"></span>
       </span>
       <nav id="navLists" class="nav__lists">
         <ul class="jos">
           <li class="nav__list">
-            <nuxt-link to="/" class="nav__link">
+            <nuxt-link to="/" class="nav__link nav__link--01">
               <span class="nav__container">
                 <span class="nav__txt">
                   <span v-for="(text, key) in 'Home'" :key="`home-text-${key}`">
@@ -31,13 +31,14 @@
             </nuxt-link>
           </li>
           <li class="nav__list">
-            <nuxt-link to="/about/" class="nav__link">
+            <nuxt-link to="/about/" class="nav__link nav__link--02">
               <span class="nav__container">
                 <span class="nav__txt">
                   <span
                     v-for="(text, key) in 'About'"
                     :key="`about-text-${key}`"
                   >
+                    {{ text }}
                   </span>
                 </span>
                 <span class="nav__txt__bk"></span>
@@ -45,13 +46,18 @@
             </nuxt-link>
           </li>
           <li class="nav__list">
-            <a href="http://urx2.nu/VpGk" target="_blank" class="nav__link">
+            <a
+              href="http://urx2.nu/VpGk"
+              arget="_blank"
+              class="nav__link nav__link--04"
+            >
               <span class="nav__container">
                 <span class="nav__txt">
                   <span
                     v-for="(text, key) in 'Contanct'"
                     :key="`contact-text-${key}`"
                   >
+                    {{ text }}
                   </span>
                   <span class="nav__txt__bk"></span>
                 </span>
@@ -64,7 +70,7 @@
     <button
       id="navButton"
       class="nav__button"
-      :class="{ 'is-show is-show2': showSwitch }"
+      :class="{ 'is-show is-show2': showSwitch, 'is-active': openedNav }"
       @click="click"
     >
       <span class="nav__button__line">
@@ -129,12 +135,79 @@ export default {
     &.is-show {
       background: #111111;
     }
+    &.is-active {
+      visibility: visible;
+      span.nav__mask__line {
+        transform: translateX(0);
+      }
+      span.nav__mask__around-line {
+        overflow: hidden;
+        &--01 {
+          width: calc(100% - 8.84rem);
+          @include mq() {
+            width: calc(100% - 6.84rem);
+          }
+          span.nav__mask__around-line__grad {
+            width: 100%;
+            height: 1px;
+            transform: translateX(100%);
+            animation: 16s maskAroundLine1 2s linear infinite;
+          }
+        }
+        &--02 {
+          height: calc(100% - 5.6rem);
+          @include mq() {
+            height: calc(100% - 3.6rem);
+          }
+          span.nav__mask__around-line__grad {
+            width: 1px;
+            height: 100%;
+            transform: translateY(-100%);
+            animation: 16s maskAroundLine2 2s linear infinite;
+          }
+        }
+        &--03 {
+          width: calc(100% - 6.56rem);
+          @include mq() {
+            width: calc(100% - 4.56rem);
+          }
+          span.nav__mask__around-line__grad {
+            width: 100%;
+            height: 1px;
+            transform: translateX(-100%);
+            animation: 16s maskAroundLine3 2s linear infinite;
+          }
+        }
+        &--04 {
+          height: calc(100% - 7.4rem);
+          @include mq() {
+            height: calc(100% - 5.4rem);
+          }
+          span.nav__mask__around-line__grad {
+            width: 1px;
+            height: 100%;
+            transform: translateY(100%);
+            animation: 16s maskAroundLine4 2s linear infinite;
+          }
+        }
+        span.nav__mask__around-line__grad {
+          display: block;
+          background: #f093fb;
+        }
+      }
+    }
     span.nav__mask__line {
       width: 100%;
+      height: calc(100vh / 8);
       background: #111111;
       display: block;
       transform: translateX(-100%);
       position: relative;
+      @for $i from 1 through 8 {
+        &:nth-of-type(#{$i}) {
+          transition: all 0.15s ease-out (random(8) * 0.015s);
+        }
+      }
     }
     span.nav__mask__around-line {
       position: absolute;
@@ -189,7 +262,7 @@ export default {
     nav.nav__lists {
       position: absolute;
       top: 50%;
-      transition: translateY(-50%);
+      transform: translateY(-50%);
       left: 6.28rem;
       z-index: 11;
       @include mq() {
@@ -208,7 +281,7 @@ export default {
             text-decoration: none;
             font-size: 24px;
             font-weight: 300;
-            letter-spacing: 5px;
+            letter-spacing: -1px;
             line-height: 1;
             position: relative;
             display: block;
@@ -226,14 +299,33 @@ export default {
               transform: translateY(-3px);
               background: #fff;
             }
-            &:hover {
-              &:before {
-                animation: 0.4s navCurrent 0s ease-out forwards;
+            &--01 {
+              &:hover {
+                &:before {
+                  animation: 0.4s navCurrent01 0s ease-out forwards;
+                }
+              }
+            }
+            &--02 {
+              &:hover {
+                &:before {
+                  animation: 0.4s navCurrent02 0s ease-out forwards;
+                }
+              }
+            }
+            &--04 {
+              &:hover {
+                &:before {
+                  animation: 0.4s navCurrent04 0s ease-out forwards;
+                }
               }
             }
             span.nav__container {
               position: relative;
               display: block;
+              &.is-active {
+                overflow: hidden;
+              }
               span.nav__txt {
                 display: inline-block;
                 span {
@@ -314,6 +406,33 @@ export default {
         }
       }
     }
+    &.is-active {
+      transform: translate(0%, 0%);
+      span.nav__button__line {
+        background: #ffffff;
+        &:nth-child(1) {
+          top: 11px;
+          transform: rotate(45deg);
+          @include mq() {
+            top: 10px;
+          }
+        }
+        &:nth-child(2) {
+          transform: translate(-100%, -50%);
+          opacity: 0;
+        }
+        &:nth-child(3) {
+          bottom: 11px;
+          transform: rotate(-45deg);
+          @include mq() {
+            bottom: 11px;
+          }
+        }
+        span.nav__button__line__grad {
+          display: none;
+        }
+      }
+    }
     span.nav__button__line {
       width: 0;
       height: 1px;
@@ -367,6 +486,111 @@ export default {
   }
   100% {
     transform: translateX(-100%);
+  }
+}
+
+@keyframes maskAroundLine1 {
+  0% {
+    transform: translateX(100%);
+  }
+  25% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(-100%);
+  }
+  75% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes maskAroundLine2 {
+  0% {
+    transform: translateY(-100%);
+  }
+  25% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(100%);
+  }
+  75% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes maskAroundLine3 {
+  0% {
+    transform: translateX(-100%);
+  }
+  25% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(-100%);
+  }
+  75% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes maskAroundLine4 {
+  0% {
+    transform: translateY(100%);
+  }
+  25% {
+    transform: translateY(100%);
+  }
+  50% {
+    transform: translateY(100%);
+  }
+  75% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes navCurrent01 {
+  100% {
+    right: 35%;
+  }
+}
+
+@keyframes navCurrent02 {
+  100% {
+    right: 30%;
+  }
+}
+
+@keyframes navCurrent04 {
+  100% {
+    right: -5%;
+  }
+}
+
+@keyframes navText {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 </style>
