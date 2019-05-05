@@ -15,7 +15,7 @@
               :class="{ 'is-active': showSns }"
             >
               <IconFb />
-              <span class="bk"></span>
+              <span ref="fbBk" class="bk fbBk"></span>
             </a>
           </li>
           <li class="sns__list tw">
@@ -26,7 +26,7 @@
               :class="{ 'is-active': showSns }"
             >
               <IconTw />
-              <span class="bk"></span>
+              <span ref="twBk" class="bk twBk"></span>
             </a>
           </li>
           <li class="sns__list github">
@@ -37,7 +37,7 @@
               :class="{ 'is-active': showSns }"
             >
               <IconGithub />
-              <span class="bk"></span>
+              <span ref="githubBk" class="bk githubBk"></span>
             </a>
           </li>
         </ul>
@@ -83,6 +83,7 @@ import IconTw from '~/components/icons/tw.vue'
 import IconGithub from '~/components/icons/github.vue'
 import LogoTxt from '~/components/common/LogoTxt.vue'
 import { mapGetters, mapMutations } from 'vuex'
+import { TimelineMax, Expo } from 'gsap'
 
 export default {
   components: {
@@ -106,7 +107,12 @@ export default {
   },
   watch: {
     async loadedIndex() {
-      await this.$_delay(500)
+      this.fbBkAnim()
+      await this.$_delay(200)
+      this.twBkAnim()
+      await this.$_delay(200)
+      this.githubBkAnim()
+      await this.$_delay(800)
       this.showSns = true
       this.showDescription = true
     }
@@ -121,7 +127,70 @@ export default {
     ...mapMutations({
       setLoadedIndex: 'setLoadedIndex',
       setUnLoadedIndex: 'setUnLoadedIndex'
-    })
+    }),
+    fbBkAnim() {
+      const timeLine = new TimelineMax()
+      requestAnimationFrame(() => {
+        timeLine
+          .set(this.$refs.fbBk, {
+            scaleY: 0,
+            transformOrigin: 'bottom center',
+            ease: Expo.easeIn
+          })
+          .to(this.$refs.fbBk, 1, {
+            scaleY: 1,
+            height: '100%',
+            ease: Expo.easeIn
+          })
+          .to(this.$refs.fbBk, 1, {
+            scaleY: 0,
+            transformOrigin: 'top center',
+            ease: Expo.easeIn
+          })
+      })
+    },
+    twBkAnim() {
+      const timeLine = new TimelineMax()
+      requestAnimationFrame(() => {
+        timeLine
+          .set(this.$refs.twBk, {
+            scaleY: 0,
+            transformOrigin: 'bottom center',
+            ease: Expo.easeIn
+          })
+          .to(this.$refs.twBk, 1, {
+            scaleY: 1,
+            height: '100%',
+            ease: Expo.easeIn
+          })
+          .to(this.$refs.twBk, 1, {
+            scaleY: 0,
+            transformOrigin: 'top center',
+            ease: Expo.easeIn
+          })
+      })
+    },
+    githubBkAnim() {
+      const timeLine = new TimelineMax()
+      requestAnimationFrame(() => {
+        timeLine
+          .set(this.$refs.githubBk, {
+            scaleY: 0,
+            transformOrigin: 'bottom center',
+            ease: Expo.easeIn
+          })
+          .to(this.$refs.githubBk, 1, {
+            scaleY: 1,
+            height: '100%',
+            ease: Expo.easeIn
+          })
+          .to(this.$refs.githubBk, 1, {
+            scaleY: 0,
+            transformOrigin: 'top center',
+            ease: Expo.easeIn
+          })
+      })
+    }
   }
 }
 </script>
@@ -167,6 +236,15 @@ export default {
           left: 0;
           bottom: 0;
           background: $text-color;
+          &.fbBk {
+            width: 12px;
+          }
+          &.twBk {
+            width: 26px;
+          }
+          &.githubBk {
+            width: 23px;
+          }
         }
       }
       &:last-child {
