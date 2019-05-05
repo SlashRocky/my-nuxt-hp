@@ -114,7 +114,7 @@ export default {
       await this.$_delay(2000)
       this.showSwitch = true
     },
-    async LoadedAbout() {
+    async loadedAbout() {
       await this.$_delay(3000)
       this.navButtonBkAnim()
       await this.$_delay(2000)

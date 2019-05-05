@@ -8,12 +8,18 @@
           <div
             id="profileCircle01"
             class="profile__circle profile__circle01"
+            :class="{ 'is-active': showSwitch }"
           ></div>
           <div
             id="profileCircle02"
             class="profile__circle profile__circle02"
+            :class="{ 'is-active': showSwitch }"
           ></div>
-          <div id="profilePicture" class="profile__picture">
+          <div
+            id="profilePicture"
+            class="profile__picture"
+            :class="{ 'is-active': showSwitch }"
+          >
             <img src="~assets/img/profile-cut.png" />
           </div>
         </div>
@@ -23,10 +29,10 @@
           </div>
         </div>
         <div class="profile__jp-name">
-          <h2 id="profileJpName">
+          <h2 id="profileJpName" :class="{ 'is-active': showSwitch }">
             轟 政明
           </h2>
-          <span id="profileJpNameBk"></span>
+          <span id="profileJpNameBk" ref="profileJpNameBk"></span>
         </div>
       </div>
       <ScrollDown />
@@ -271,9 +277,13 @@ import IconFb from '~/components/icons/fb.vue'
 import IconTw from '~/components/icons/tw.vue'
 import IconGithub from '~/components/icons/github.vue'
 import Footer from '~/components/common/Footer.vue'
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
+import { TimelineMax, Expo } from 'gsap'
 
 export default {
+  head: {
+    title: 'About - MasaakiTodoroki'
+  },
   components: {
     Nav,
     Logo,
@@ -283,6 +293,24 @@ export default {
     IconGithub,
     ScrollDown,
     Footer
+  },
+  data() {
+    return {
+      showSwitch: false
+    }
+  },
+  computed: {
+    ...mapGetters({
+      loadedAbout: 'loadedAbout'
+    })
+  },
+  watch: {
+    async loadedAbout() {
+      await this.$_delay(3000)
+      this.profileJpNameBkAnim()
+      await this.$_delay(1000)
+      this.showSwitch = true
+    }
   },
   mounted() {
     this.setLoadedAbout()
@@ -294,7 +322,28 @@ export default {
     ...mapMutations({
       setLoadedAbout: 'setLoadedAbout',
       setUnLoadedAbout: 'setUnLoadedAbout'
-    })
+    }),
+    profileJpNameBkAnim() {
+      const timeLine = new TimelineMax()
+      requestAnimationFrame(() => {
+        timeLine
+          .set(this.$refs.profileJpNameBk, {
+            scaleY: 0,
+            transformOrigin: 'center top',
+            ease: Expo.easeIn
+          })
+          .to(this.$refs.profileJpNameBk, 1, {
+            scaleY: 1,
+            height: '100%',
+            ease: Expo.easeIn
+          })
+          .to(this.$refs.profileJpNameBk, 1, {
+            scaleY: 0,
+            transformOrigin: 'center bottom',
+            ease: Expo.easeIn
+          })
+      })
+    }
   }
 }
 </script>
@@ -321,7 +370,7 @@ header.header {
         position: absolute;
         top: 0;
         left: 0;
-        opacity: 1;
+        opacity: 0;
         transition: all 3s;
         transition-delay: 1s;
         &.profile__circle01 {
@@ -334,9 +383,12 @@ header.header {
           background: rgba(247, 247, 247, 0.8);
           z-index: 2;
         }
+        &.is-active {
+          opacity: 1;
+        }
       }
       .profile__picture {
-        opacity: 1;
+        opacity: 0;
         transition: all 1s;
         img {
           width: 216px;
@@ -348,6 +400,9 @@ header.header {
           left: 50%;
           transform: translate(-50%, -50%);
           animation: imgProfile 5s ease-in infinite;
+        }
+        &.is-active {
+          opacity: 1;
         }
       }
     }
@@ -377,7 +432,10 @@ header.header {
         color: #efefef;
         writing-mode: vertical-rl;
         font-weight: 200;
-        opacity: 1;
+        opacity: 0;
+        &.is-active {
+          opacity: 1;
+        }
         @include mq() {
           font-weight: 32px;
         }
@@ -388,6 +446,8 @@ header.header {
         position: absolute;
         top: 0;
         left: 0;
+        width: 83px;
+        height: 207px;
       }
     }
   }
