@@ -82,7 +82,7 @@
       <span class="nav__button__line">
         <span class="nav__button__line__grad"></span>
       </span>
-      <span class="nav__button__bk"></span>
+      <span ref="navButtonBk" class="nav__button__bk"></span>
     </button>
   </div>
 </template>
@@ -90,6 +90,7 @@
 <script>
 import LogoNav from '~/components/common/LogoNav'
 import { mapGetters, mapMutations } from 'vuex'
+import { TimelineMax, Expo } from 'gsap'
 
 export default {
   components: {
@@ -109,16 +110,42 @@ export default {
   },
   watch: {
     async loadedIndex() {
+      this.navButtonBkAnim()
+      await this.$_delay(2000)
       this.showSwitch = true
     },
     async LoadedAbout() {
+      await this.$_delay(3000)
+      this.navButtonBkAnim()
+      await this.$_delay(2000)
       this.showSwitch = true
     }
   },
   methods: {
     ...mapMutations({
       click: 'click'
-    })
+    }),
+    navButtonBkAnim() {
+      const timeLine = new TimelineMax()
+      requestAnimationFrame(() => {
+        timeLine
+          .set(this.$refs.navButtonBk, {
+            scaleX: 0,
+            transformOrigin: 'right center',
+            ease: Expo.easeIn
+          })
+          .to(this.$refs.navButtonBk, 1, {
+            scaleX: 1,
+            width: '100%',
+            ease: Expo.easeIn
+          })
+          .to(this.$refs.navButtonBk, 1, {
+            scaleX: 0,
+            transformOrigin: 'left center',
+            ease: Expo.easeIn
+          })
+      })
+    }
   }
 }
 </script>
@@ -369,6 +396,7 @@ export default {
       position: absolute;
       top: 0;
       right: 0;
+      height: 24px;
     }
     &.is-show {
       span.nav__button__line {
