@@ -12,6 +12,7 @@
               href="https://www.facebook.com/masaaki.todoroki.5"
               target="_blank"
               class="sns__link"
+              :class="{ 'is-active': showSns }"
             >
               <IconFb />
               <span class="bk"></span>
@@ -22,6 +23,7 @@
               href="https://twitter.com/Slash_Rocky"
               target="_blank"
               class="sns__link"
+              :class="{ 'is-active': showSns }"
             >
               <IconTw />
               <span class="bk"></span>
@@ -32,6 +34,7 @@
               href="https://github.com/SlashRocky"
               target="_blank"
               class="sns__link"
+              :class="{ 'is-active': showSns }"
             >
               <IconGithub />
               <span class="bk"></span>
@@ -43,7 +46,11 @@
     <main class="main">
       <div class="logo">
         <LogoTxt />
-        <div id="logoDescription" class="logo__description">
+        <div
+          id="logoDescription"
+          class="logo__description"
+          :class="{ 'logo__description--active': showDescription }"
+        >
           <p>
             <span
               v-for="(text, key) in '川崎市在住の'"
@@ -75,7 +82,7 @@ import IconFb from '~/components/icons/fb.vue'
 import IconTw from '~/components/icons/tw.vue'
 import IconGithub from '~/components/icons/github.vue'
 import LogoTxt from '~/components/common/LogoTxt.vue'
-import { mapMutations } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   components: {
@@ -85,6 +92,24 @@ export default {
     IconTw,
     IconGithub,
     LogoTxt
+  },
+  data() {
+    return {
+      showSns: false,
+      showDescription: false
+    }
+  },
+  computed: {
+    ...mapGetters({
+      loadedIndex: 'loadedIndex'
+    })
+  },
+  watch: {
+    async loadedIndex() {
+      await this.$_delay(500)
+      this.showSns = true
+      this.showDescription = true
+    }
   },
   mounted() {
     this.setLoadedIndex()
@@ -134,7 +159,7 @@ export default {
           fill: $text-color;
           height: 1.5rem;
           transition: all 0.4s;
-          opacity: 1;
+          opacity: 0;
         }
         span.bk {
           display: block;
@@ -149,6 +174,11 @@ export default {
       }
       &.fb {
         a {
+          &.is-active {
+            svg {
+              animation: 2s snsLinkSvg 0.7s forwards;
+            }
+          }
           svg {
             &:hover {
               fill: #3b5998;
@@ -158,6 +188,11 @@ export default {
       }
       &.tw {
         a {
+          &.is-active {
+            svg {
+              animation: 2s snsLinkSvg 0.8s forwards;
+            }
+          }
           svg {
             &:hover {
               fill: #1daaf2;
@@ -167,6 +202,11 @@ export default {
       }
       &.github {
         a {
+          &.is-active {
+            svg {
+              animation: 2s snsLinkSvg 0.9s forwards;
+            }
+          }
           svg {
             &:hover {
               fill: #1a1414;
@@ -196,14 +236,74 @@ export default {
   .logo__description {
     font-size: 14px;
     line-height: 1.7;
+    letter-spacing: -0.1rem;
     @include mq() {
       font-size: 12px;
     }
-    p {
-      span {
-        opacity: 1;
+    &.logo__description--active {
+      p {
+        span {
+          &.logo__description-l01 {
+            @for $i from 1 through 6 {
+              &:nth-of-type(#{$i}) {
+                animation: 1s
+                  logoDescription
+                  ((random(19) * 0.1s) + 2s)
+                  forwards;
+              }
+            }
+          }
+          &.logo__description-l02 {
+            @for $i from 1 through 12 {
+              &:nth-of-type(#{$i}) {
+                animation: 1s
+                  logoDescription
+                  ((random(19) * 0.1s) + 2s)
+                  forwards;
+              }
+            }
+          }
+        }
       }
     }
+    p {
+      span {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+@keyframes snsLinkSvg {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+  }
+  53% {
+    opacity: 1;
+  }
+  76% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes logoDescription {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 </style>
