@@ -61,7 +61,12 @@
         </ul>
       </nav>
     </div>
-    <button id="navButton" class="nav__button" @click="click">
+    <button
+      id="navButton"
+      class="nav__button"
+      :class="{ 'is-show is-show2': showSwitch }"
+      @click="click"
+    >
       <span class="nav__button__line">
         <span class="nav__button__line__grad"></span>
       </span>
@@ -84,12 +89,25 @@ export default {
   components: {
     LogoNav
   },
+  data() {
+    return {
+      showSwitch: false
+    }
+  },
   computed: {
     ...mapGetters({
       openedNav: 'openedNav',
       loadedIndex: 'loadedIndex',
       loadedAbout: 'loadedAbout'
     })
+  },
+  watch: {
+    async loadedIndex() {
+      this.showSwitch = true
+    },
+    async LoadedAbout() {
+      this.showSwitch = true
+    }
   },
   methods: {
     ...mapMutations({
@@ -108,6 +126,9 @@ export default {
     width: 100%;
     visibility: hidden;
     z-index: 10;
+    &.is-show {
+      background: #111111;
+    }
     span.nav__mask__line {
       width: 100%;
       background: #111111;
@@ -257,6 +278,42 @@ export default {
       top: 0;
       right: 0;
     }
+    &.is-show {
+      span.nav__button__line {
+        &:nth-child(1) {
+          animation: 0.3s buttonLineShow 0s linear forwards;
+        }
+        &:nth-child(2) {
+          animation: 0.3s buttonLineShow 0.3s linear forwards;
+        }
+        &:nth-child(3) {
+          animation: 0.3s buttonLineShow 0.6s linear forwards;
+        }
+      }
+    }
+    &.is-show2 {
+      span.nav__button__line {
+        span.nav__button__line__grad {
+          width: 200%;
+          transform: translateX(50%);
+        }
+        &:nth-child(1) {
+          span.nav__button__line__grad {
+            animation: buttonLine 2s Linear 0.1s infinite;
+          }
+        }
+        &:nth-child(2) {
+          span.nav__button__line__grad {
+            animation: buttonLine 2s Linear 0.2s infinite;
+          }
+        }
+        &:nth-child(3) {
+          span.nav__button__line__grad {
+            animation: buttonLine 2s Linear 0.3s infinite;
+          }
+        }
+      }
+    }
     span.nav__button__line {
       width: 0;
       height: 1px;
@@ -292,6 +349,24 @@ export default {
 @keyframes navCurrent {
   100% {
     right: 0;
+  }
+}
+
+@keyframes buttonLineShow {
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes buttonLine {
+  0% {
+    transform: translateX(100%);
+  }
+  80% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }
 </style>
