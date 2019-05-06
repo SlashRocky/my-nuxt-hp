@@ -38,14 +38,14 @@
       <ScrollDown />
     </header>
     <main class="main">
-      <div id="sectionLinePosition"></div>
-      <div id="sectionLine" class="section-line"></div>
+      <div id="sectionLinePosition" ref="sectionLinePosition"></div>
+      <div id="sectionLine" ref="sectionLine" class="section-line"></div>
       <section id="aboutSection" class="section">
         <div id="aboutSectionInner" class="section__inner">
           <div id="aboutSectionTitle" class="section__title">
             <div class="section__container section__container01">
-              <h2 class="section__en jos">
-                <div class="bk"></div>
+              <h2 ref="sectionEn" class="section__en jos">
+                <div ref="sectionEnBk" class="bk"></div>
                 <span
                   v-for="(text, key) in 'Profile'"
                   :key="`profile-text-en-${key}`"
@@ -55,8 +55,8 @@
               </h2>
             </div>
             <div class="section__container section__container02">
-              <h2 class="section__jp">
-                <div class="bk"></div>
+              <h2 ref="sectionJp" class="section__jp">
+                <div ref="sectionJpBk" class="bk"></div>
                 <span
                   v-for="(text, key) in 'プロフィール'"
                   :key="`profile-text-jp-${key}`"
@@ -66,14 +66,18 @@
               </h2>
             </div>
           </div>
-          <div id="sectionContent01" class="section__content">
+          <div
+            id="sectionContent01"
+            ref="sectionContent01"
+            class="section__content"
+          >
             <div id="sectionLine01" class="section__line">
               <svg
                 viewbox="0 0 18 18"
                 xmlns="http://www.w3.org/2000/svg"
                 class="section__circle"
               >
-                <circle cx="9" cy="9" r="8" />
+                <circle ref="sectionCircle01" cx="9" cy="9" r="8" />
               </svg>
             </div>
             <div class="section__txt">
@@ -108,14 +112,18 @@
               </div>
             </div>
           </div>
-          <div id="sectionContent02" class="section__content">
+          <div
+            id="sectionContent02"
+            ref="sectionContent02"
+            class="section__content"
+          >
             <div id="sectionLine02" class="section__line">
               <svg
                 viewbox="0 0 18 18"
                 xmlns="http://www.w3.org/2000/svg"
                 class="section__circle"
               >
-                <circle cx="9" cy="9" r="8" />
+                <circle ref="sectionCircle02" cx="9" cy="9" r="8" />
               </svg>
             </div>
             <div class="section__txt">
@@ -163,14 +171,18 @@
               </div>
             </div>
           </div>
-          <div id="sectionContent03" class="section__content">
+          <div
+            id="sectionContent03"
+            ref="sectionContent03"
+            class="section__content"
+          >
             <div id="sectionLine03" class="section__line">
               <svg
                 viewbox="0 0 18 18"
                 xmlns="http://www.w3.org/2000/svg"
                 class="section__circle"
               >
-                <circle cx="9" cy="9" r="8" />
+                <circle ref="sectionCircle03" cx="9" cy="9" r="8" />
               </svg>
             </div>
             <div class="section__txt">
@@ -314,9 +326,11 @@ export default {
   },
   mounted() {
     this.setLoadedAbout()
+    window.addEventListener('scroll', this.scrollEvent)
   },
   destroyed() {
     this.setUnLoadedAbout()
+    window.removeEventListener('scroll', this.scrollEvent)
   },
   methods: {
     ...mapMutations({
@@ -324,9 +338,9 @@ export default {
       setUnLoadedAbout: 'setUnLoadedAbout'
     }),
     profileJpNameBkAnim() {
-      const timeLine = new TimelineMax()
+      const tlProfileJpNameBkAnim = new TimelineMax()
       requestAnimationFrame(() => {
-        timeLine
+        tlProfileJpNameBkAnim
           .set(this.$refs.profileJpNameBk, {
             scaleY: 0,
             transformOrigin: 'center top',
@@ -343,6 +357,141 @@ export default {
             ease: Expo.easeIn
           })
       })
+    },
+    sectionCircle01Anim() {
+      const sectionCircle01 = this.$refs.sectionCircle01
+      sectionCircle01.classList.add('is-activeFill')
+    },
+    sectionCircle02Anim() {
+      const sectionCircle02 = this.$refs.sectionCircle02
+      sectionCircle02.classList.add('is-activeFill')
+    },
+    sectionCircle03Anim() {
+      const sectionCircle03 = this.$refs.sectionCircle03
+      sectionCircle03.classList.add('is-activeFill')
+    },
+    scrollEvent() {
+      const sectionLine = this.$refs.sectionLine
+      let sectionLinePosition = sectionLine.getBoundingClientRect().top
+      if (
+        sectionLinePosition - window.innerHeight < 0 &&
+        sectionLine.classList.contains('is-active') !== true
+      ) {
+        sectionLine.classList.add('is-active')
+        const tlSectionLineAnim = new TimelineMax()
+        requestAnimationFrame(() => {
+          tlSectionLineAnim
+            .to(sectionLine, 0.7, {
+              scaleX: 1.2,
+              width: '120%',
+              ease: Expo.easeIn
+            })
+            .to(sectionLine, 1, {
+              rotation: -3,
+              ease: Back.easeInOut.config(1.5)
+            })
+        })
+      }
+
+      const sectionEn = this.$refs.sectionEn
+      let sectionEnPosition = sectionEn.getBoundingClientRect().top
+      if (
+        sectionEnPosition - window.innerHeight < 0 &&
+        sectionEn.classList.contains('is-active') !== true
+      ) {
+        sectionEn.classList.add('is-active')
+        const sectionEnBk = this.$refs.sectionEnBk
+        const tlSectionEnBk = new TimelineMax()
+        requestAnimationFrame(() => {
+          tlSectionEnBk
+            .set(sectionEnBk, {
+              scaleX: 0,
+              transformOrigin: 'left center',
+              ease: Expo.easeIn
+            })
+            .to(sectionEnBk, 1, {
+              scaleX: 1,
+              width: '100%',
+              ease: Expo.easeIn
+            })
+            .to(sectionEnBk, 1, {
+              scaleX: 0,
+              transformOrigin: 'right center',
+              ease: Expo.easeIn
+            })
+        })
+      }
+
+      const sectionJp = this.$refs.sectionJp
+      let sectionJpPosition = sectionJp.getBoundingClientRect().top
+      if (
+        sectionJpPosition - window.innerHeight < 0 &&
+        sectionJp.classList.contains('is-active') !== true
+      ) {
+        sectionJp.classList.add('is-active')
+        const sectionJpBk = this.$refs.sectionJpBk
+        const tlSectionJpBk = new TimelineMax()
+        requestAnimationFrame(() => {
+          tlSectionJpBk
+            .set(sectionJpBk, {
+              scaleX: 0,
+              transformOrigin: 'left center',
+              ease: Expo.easeIn
+            })
+            .to(sectionJpBk, 1, {
+              scaleX: 1,
+              width: '100%',
+              ease: Expo.easeIn
+            })
+            .to(sectionJpBk, 1, {
+              scaleX: 0,
+              transformOrigin: 'right center',
+              ease: Expo.easeIn,
+              onComplete: function() {
+                console.log('test')
+              }
+            })
+        })
+      }
+
+      const sectionContent01 = this.$refs.sectionContent01
+      const sectionCircle01 = this.$refs.sectionCircle01
+      let sectionContent01Position = sectionContent01.getBoundingClientRect()
+        .top
+      if (
+        sectionContent01Position - window.innerHeight < 0 &&
+        sectionContent01.classList.contains('is-active') !== true
+      ) {
+        sectionContent01.classList.add('is-active')
+        sectionCircle01.classList.add('is-activeStroke')
+        setTimeout(this.sectionCircle01Anim, 1600)
+      }
+
+      const sectionContent02 = this.$refs.sectionContent02
+      const sectionCircle02 = this.$refs.sectionCircle02
+      let sectionContent02Position = sectionContent02.getBoundingClientRect()
+        .top
+      if (
+        sectionContent02Position - window.innerHeight < 0 &&
+        sectionContent02.classList.contains('is-active') !== true
+      ) {
+        sectionContent02.classList.add('is-active')
+        sectionCircle02.classList.add('is-activeStroke')
+        setTimeout(this.sectionCircle02Anim, 1600)
+      }
+
+      const sectionContent03 = this.$refs.sectionContent03
+      const sectionCircle03 = this.$refs.sectionCircle03
+      let sectionContent03Position = sectionContent03.getBoundingClientRect()
+        .top
+      if (
+        sectionContent03Position - window.innerHeight < 0 &&
+        sectionContent03.classList.contains('is-active') !== true
+      ) {
+        sectionContent03.classList.add('is-active')
+        sectionCircle03.classList.add('is-activeStroke')
+        setTimeout(this.sectionCircle03Anim, 1600)
+      }
     }
   }
 }
@@ -374,12 +523,12 @@ header.header {
         transition: all 3s;
         transition-delay: 1s;
         &.profile__circle01 {
-          animation: circle 5s ease-out infinite;
+          animation: profileCircle 5s ease-out infinite;
           background: rgba(234, 234, 234, 0.8);
           z-index: 1;
         }
         &.profile__circle02 {
-          animation: circle 5s ease-in infinite;
+          animation: profileCircle 5s ease-in infinite;
           background: rgba(247, 247, 247, 0.8);
           z-index: 2;
         }
@@ -509,9 +658,20 @@ main.main {
             top: 0;
             left: 0;
             background: $text-color;
+            width: 197px;
+            height: 66px;
           }
           span {
-            opacity: 1;
+            opacity: 0;
+          }
+          &.is-active {
+            span {
+              @for $i from 1 through 12 {
+                &:nth-of-type(#{$i}) {
+                  animation: 2s textOpacity (random(12) * 0.1s + 1s) forwards;
+                }
+              }
+            }
           }
         }
         h2.section__jp {
@@ -520,14 +680,26 @@ main.main {
           display: inline-block;
           overflow: hidden;
           position: relative;
+          letter-spacing: -1.4px;
           .bk {
-            position: relative;
+            position: absolute;
             top: 0;
             left: 0;
             background: $text-color;
+            width: 85px;
+            height: 18px;
           }
           span {
-            opacity: 1;
+            opacity: 0;
+          }
+          &.is-active {
+            span {
+              @for $i from 1 through 12 {
+                &:nth-of-type(#{$i}) {
+                  animation: 2s textOpacity (random(12) * 0.1s + 1s) forwards;
+                }
+              }
+            }
           }
         }
       }
@@ -538,6 +710,27 @@ main.main {
             padding-bottom: 0;
           }
         }
+        &.is-active {
+          .section__txt {
+            h3 {
+              span {
+                @for $i from 1 through 25 {
+                  &:nth-of-type(#{$i}) {
+                    animation: 1s textOpacity (random(25) * 0.1s) forwards;
+                  }
+                }
+              }
+            }
+            .section__description {
+              opacity: 1;
+            }
+          }
+          .section__line {
+            &:before {
+              height: 100%;
+            }
+          }
+        }
         .section__line {
           position: absolute;
           top: 0;
@@ -546,18 +739,30 @@ main.main {
           &:before {
             content: '';
             width: 1px;
-            height: 100%;
+            height: 0%;
             transition: height 1s ease-out 1.5s;
             background: $text-color;
             position: absolute;
             top: 1px;
-            left: 6.5px;
+            left: 0.47rem;
           }
           svg {
             width: 1rem;
             height: 1rem;
             transform: rotate(-90deg);
             vertical-align: top;
+            circle {
+              &.is-activeStroke {
+                fill: transparent;
+                stroke: $text-color;
+                stroke-width: 1px;
+                stroke-dasharray: 49.94157409667969;
+                animation: sectionCircle 1.6s linear 0s;
+                &.is-activeFill {
+                  fill: #000000;
+                }
+              }
+            }
           }
         }
         .section__txt {
@@ -580,7 +785,7 @@ main.main {
             }
           }
           .section__description {
-            opacity: 1;
+            opacity: 0;
             transition: 2s opacity ease-in;
             ul.sns-lists {
               height: 1.5rem;
@@ -798,7 +1003,7 @@ main.main {
   }
 }
 
-@keyframes circle {
+@keyframes profileCircle {
   0% {
     transform: rotate(0deg) translate(0, 0);
   }
@@ -840,6 +1045,35 @@ main.main {
   100% {
     mix-blend-mode: multiply;
     filter: grayscale(0);
+  }
+}
+
+@keyframes textOpacity {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes sectionCircle {
+  0% {
+    stroke-dashoffset: 49.94157409667969;
+  }
+  50% {
+    stroke-dashoffset: 0;
+    fill: transparent;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    fill: #000000;
   }
 }
 </style>
