@@ -313,6 +313,8 @@ export default {
   },
   computed: {
     ...mapGetters({
+      openedNav: 'openedNav',
+      loadedIndex: 'loadedIndex',
       loadedAbout: 'loadedAbout'
     })
   },

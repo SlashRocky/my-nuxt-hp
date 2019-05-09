@@ -102,7 +102,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      loadedIndex: 'loadedIndex'
+      openedNav: 'openedNav',
+      loadedIndex: 'loadedIndex',
+      loadedAbout: 'loadedAbout'
     })
   },
   watch: {

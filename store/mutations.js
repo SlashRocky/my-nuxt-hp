@@ -5,7 +5,7 @@ export default {
   setLoadedIndex(state) {
     state.loadedIndex = true
   },
-  setUnloadedIndex(state) {
+  setUnLoadedIndex(state) {
     state.loadedIndex = false
   },
   setLoadedAbout(state) {
