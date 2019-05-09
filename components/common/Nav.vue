@@ -1,6 +1,10 @@
 <template>
   <div class="nav">
-    <div id="navMask" class="nav__mask" :class="{ 'is-active': openedNav }">
+    <div
+      id="navMask"
+      class="nav__mask"
+      :class="{ 'is-show': showSwitch, 'is-active': openedNav }"
+    >
       <LogoNav />
       <span v-for="n in 8" :key="`nav-mask-line=${n}`" class="nav__mask__line">
       </span>
@@ -19,21 +23,37 @@
       <nav id="navLists" class="nav__lists">
         <ul class="jos">
           <li class="nav__list">
-            <nuxt-link to="/" class="nav__link nav__link--01">
-              <span class="nav__container">
-                <span class="nav__txt">
+            <nuxt-link
+              id="navLink01"
+              to="/"
+              class="nav__link nav__link--01"
+              @click.native="click"
+            >
+              <span
+                id="navContainer01"
+                class="nav__container nav__container--01"
+              >
+                <span id="navTxt01" class="nav__txt nav__txt--01">
                   <span v-for="(text, key) in 'Home'" :key="`home-text-${key}`">
                     {{ text }}
                   </span>
                 </span>
-                <span class="nav__txt__bk"></span>
+                <span ref="navTxtBk01" class="nav__txt__bk"></span>
               </span>
             </nuxt-link>
           </li>
           <li class="nav__list">
-            <nuxt-link to="/about/" class="nav__link nav__link--02">
-              <span class="nav__container">
-                <span class="nav__txt">
+            <nuxt-link
+              id="navLink02"
+              to="/about/"
+              class="nav__link nav__link--02"
+              @click.native="click"
+            >
+              <span
+                id="navContainer02"
+                class="nav__container nav__container--02"
+              >
+                <span id="navTxt02" class="nav__txt nav__txt--02">
                   <span
                     v-for="(text, key) in 'About'"
                     :key="`about-text-${key}`"
@@ -41,26 +61,30 @@
                     {{ text }}
                   </span>
                 </span>
-                <span class="nav__txt__bk"></span>
+                <span ref="navTxtBk02" class="nav__txt__bk"></span>
               </span>
             </nuxt-link>
           </li>
           <li class="nav__list">
             <a
+              id="navLink04"
               href="http://urx2.nu/VpGk"
-              arget="_blank"
+              target="_blank"
               class="nav__link nav__link--04"
             >
-              <span class="nav__container">
-                <span class="nav__txt">
+              <span
+                id="navContainer04"
+                class="nav__container nav__container--04"
+              >
+                <span id="navTxt04" class="nav__txt nav__txt--04">
                   <span
-                    v-for="(text, key) in 'Contanct'"
+                    v-for="(text, key) in 'Contact'"
                     :key="`contact-text-${key}`"
                   >
                     {{ text }}
                   </span>
-                  <span class="nav__txt__bk"></span>
                 </span>
+                <span ref="navTxtBk04" class="nav__txt__bk"></span>
               </span>
             </a>
           </li>
@@ -90,7 +114,7 @@
 <script>
 import LogoNav from '~/components/common/LogoNav'
 import { mapGetters, mapMutations } from 'vuex'
-import { TimelineMax, Expo } from 'gsap'
+import { TimelineMax, TimelineLite, Expo } from 'gsap'
 
 export default {
   components: {
@@ -119,6 +143,19 @@ export default {
       this.navButtonBkAnim()
       await this.$_delay(2000)
       this.showSwitch = true
+    },
+    async openedNav(val) {
+      if (val) {
+        this.navTxtBk01AnimStart()
+        await this.$_delay(200)
+        this.navTxtBk02AnimStart()
+        await this.$_delay(200)
+        this.navTxtBk04AnimStart()
+      } else {
+        this.navTxtBk01AnimSop()
+        this.navTxtBk02AnimSop()
+        this.navTxtBk04AnimSop()
+      }
     }
   },
   methods: {
@@ -145,6 +182,150 @@ export default {
             ease: Expo.easeIn
           })
       })
+    },
+    navTxtBk01AnimStart() {
+      const navTxtBk01 = this.$refs.navTxtBk01
+      const tlNavTxtBk01 = new TimelineLite()
+      tlNavTxtBk01
+        .fromTo(
+          navTxtBk01,
+          0.4,
+          {
+            width: 0,
+            height: '1px',
+            x: '-150px',
+            y: '-50%'
+          },
+          {
+            width: '81px',
+            height: '1px',
+            x: '0%',
+            y: '-50%',
+            ease: Expo.easeOut,
+            delay: 0.8
+          }
+        )
+        .to(navTxtBk01, 0.7, {
+          height: '24px',
+          ease: Expo.easeOut,
+          onComplete: function() {
+            document.getElementById('navContainer01').classList.add('is-active')
+            document.getElementById('navTxt01').classList.add('is-active')
+          }
+        })
+        .to(navTxtBk01, 0.7, {
+          x: '101%',
+          ease: Expo.easeOut,
+          onComplete: function() {
+            document.getElementById('navLink01').classList.add('is-active')
+            navTxtBk01.removeAttribute('style')
+            document
+              .getElementById('navContainer01')
+              .classList.remove('is-active')
+          }
+        })
+    },
+    navTxtBk02AnimStart() {
+      const navTxtBk02 = this.$refs.navTxtBk02
+      const tlNavTxtBk02 = new TimelineLite()
+      tlNavTxtBk02
+        .fromTo(
+          navTxtBk02,
+          0.4,
+          {
+            width: 0,
+            height: '1px',
+            x: '-150px',
+            y: '-50%'
+          },
+          {
+            width: '88px',
+            height: '1px',
+            x: '0%',
+            y: '-50%',
+            ease: Expo.easeOut,
+            delay: 0.8
+          }
+        )
+        .to(navTxtBk02, 0.7, {
+          height: '24px',
+          ease: Expo.easeOut,
+          onComplete: function() {
+            document.getElementById('navContainer02').classList.add('is-active')
+            document.getElementById('navTxt02').classList.add('is-active')
+          }
+        })
+        .to(navTxtBk02, 0.7, {
+          x: '101%',
+          ease: Expo.easeOut,
+          onComplete: function() {
+            document.getElementById('navLink02').classList.add('is-active')
+            navTxtBk02.removeAttribute('style')
+            document
+              .getElementById('navContainer02')
+              .classList.remove('is-active')
+          }
+        })
+    },
+    navTxtBk04AnimStart() {
+      const navTxtBk04 = this.$refs.navTxtBk04
+      const tlNavTxtBk04 = new TimelineLite()
+      tlNavTxtBk04
+        .fromTo(
+          navTxtBk04,
+          0.4,
+          {
+            width: 0,
+            height: '1px',
+            x: '-150px',
+            y: '-50%'
+          },
+          {
+            width: '116px',
+            height: '1px',
+            x: '0%',
+            y: '-50%',
+            ease: Expo.easeOut,
+            delay: 0.8
+          }
+        )
+        .to(navTxtBk04, 0.7, {
+          height: '24px',
+          ease: Expo.easeOut,
+          onComplete: function() {
+            document.getElementById('navContainer04').classList.add('is-active')
+            document.getElementById('navTxt04').classList.add('is-active')
+          }
+        })
+        .to(navTxtBk04, 0.7, {
+          x: '101%',
+          ease: Expo.easeOut,
+          onComplete: function() {
+            document.getElementById('navLink04').classList.add('is-active')
+            navTxtBk04.removeAttribute('style')
+            document
+              .getElementById('navContainer04')
+              .classList.remove('is-active')
+          }
+        })
+    },
+    navTxtBk01AnimSop() {
+      const navTxt01 = document.getElementById('navTxt01')
+      navTxt01.classList.remove('is-active')
+      const navLink01 = document.getElementById('navLink01')
+      navLink01.classList.remove('is-active')
+    },
+    navTxtBk02AnimSop() {
+      const navTxt02 = document.getElementById('navTxt02')
+      navTxt02.classList.remove('is-active')
+      const navLink02 = document.getElementById('navLink02')
+      navLink02.classList.remove('is-active')
+    },
+    navTxtBk04AnimSop() {
+      const navTxt04 = document.getElementById('navTxt04')
+      navTxt04.classList.remove('is-active')
+      const navLink04 = document.getElementById('navLink04')
+      navLink04.classList.remove('is-active')
     }
   }
 }
@@ -157,6 +338,7 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
+    height: 100vh;
     visibility: hidden;
     z-index: 10;
     &.is-show {
@@ -230,6 +412,7 @@ export default {
       display: block;
       transform: translateX(-100%);
       position: relative;
+      padding: 0;
       @for $i from 1 through 8 {
         &:nth-of-type(#{$i}) {
           transition: all 0.15s ease-out (random(8) * 0.015s);
@@ -304,7 +487,7 @@ export default {
             margin-bottom: 0;
           }
           a.nav__link {
-            color: #fff;
+            color: #ffffff;
             text-decoration: none;
             font-size: 24px;
             font-weight: 300;
@@ -315,6 +498,39 @@ export default {
             @include mq() {
               font-size: 21px;
             }
+            &--01 {
+              &.nuxt-link-exact-active {
+                &.is-active {
+                  &.is-current {
+                    &:before {
+                      animation: 0.4s navCurrent01 0.4s ease-out forwards;
+                    }
+                  }
+                }
+              }
+            }
+            &--02 {
+              &.nuxt-link-exact-active {
+                &.is-active {
+                  &.is-current {
+                    &:before {
+                      animation: 0.4s navCurrent02 0.4s ease-out forwards;
+                    }
+                  }
+                }
+              }
+            }
+            &--04 {
+              &.nuxt-link-exact-active {
+                &.is-active {
+                  &.is-current {
+                    &:before {
+                      animation: 0.4s navCurrent04 0.4s ease-out forwards;
+                    }
+                  }
+                }
+              }
+            }
             &:before {
               content: '';
               display: block;
@@ -324,7 +540,7 @@ export default {
               top: 50%;
               right: 300%;
               transform: translateY(-3px);
-              background: #fff;
+              background: #ffffff;
             }
             &--01 {
               &:hover {
@@ -350,13 +566,55 @@ export default {
             span.nav__container {
               position: relative;
               display: block;
+              &--01 {
+                width: 81px;
+              }
+              &--02 {
+                width: 88px;
+              }
+              &--04 {
+                width: 116px;
+              }
               &.is-active {
                 overflow: hidden;
               }
               span.nav__txt {
                 display: inline-block;
                 span {
-                  opacity: 1;
+                  opacity: 0;
+                }
+                &--01 {
+                  &.is-active {
+                    span {
+                      @for $i from 1 through 4 {
+                        &:nth-of-type(#{$i}) {
+                          animation: 1s navTxt (random(4) * 0.1s) forwards;
+                        }
+                      }
+                    }
+                  }
+                }
+                &--02 {
+                  &.is-active {
+                    span {
+                      @for $i from 1 through 5 {
+                        &:nth-of-type(#{$i}) {
+                          animation: 1s navTxt (random(5) * 0.1s) forwards;
+                        }
+                      }
+                    }
+                  }
+                }
+                &--04 {
+                  &.is-active {
+                    span {
+                      @for $i from 1 through 7 {
+                        &:nth-of-type(#{$i}) {
+                          animation: 1s navTxt (random(7) * 0.1s) forwards;
+                        }
+                      }
+                    }
+                  }
                 }
               }
               span.nav__txt__bk {
@@ -493,12 +751,6 @@ export default {
   }
 }
 
-@keyframes navCurrent {
-  100% {
-    right: 0;
-  }
-}
-
 @keyframes buttonLineShow {
   100% {
     width: 100%;
@@ -607,7 +859,7 @@ export default {
   }
 }
 
-@keyframes navText {
+@keyframes navTxt {
   0% {
     opacity: 0;
   }
