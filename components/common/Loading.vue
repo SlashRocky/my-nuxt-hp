@@ -18,6 +18,7 @@
 
 <script>
 import LoadingLogo from '~/components/common/LoadingLogo.vue'
+import { TweenMax, Expo } from 'gsap'
 
 export default {
   components: {
@@ -27,17 +28,58 @@ export default {
     start() {
       const windowWidth = window.innerWidth
       const windowHeight = window.innerHeight
+
       const loadingMask = document.getElementById('loadingMask')
       loadingMask.classList.add('is-active')
       loadingMask.style.height = windowHeight + 'px'
+
+      const loadingBack = document.getElementById('loadingBack')
+      TweenMax.fromTo(
+        loadingBack,
+        1,
+        {
+          x: '-100%',
+          width: '100%'
+        },
+        {
+          x: '0%',
+          width: '100%',
+          ease: Expo.easeInOut,
+          onStart: function() {
+            loadingBack.style.background = '#ffffff'
+            loadingBack.style.width = '0px'
+            loadingBack.style.height = windowHeight + 'px'
+          }
+        }
+      )
     },
     finish() {
       const windowWidth = window.innerWidth
       const windowHeight = window.innerHeight
       const loadingMask = document.getElementById('loadingMask')
+      const loadingBack = document.getElementById('loadingBack')
       setTimeout(() => {
         loadingMask.classList.remove('is-active')
         loadingMask.style.height = '0px'
+
+        loadingBack.style.background = '#232323'
+        TweenMax.fromTo(
+          loadingBack,
+          1,
+          {
+            left: '0%',
+            width: '100%'
+          },
+          {
+            left: '100%',
+            width: 0,
+            ease: Expo.easeOut,
+            delay: 0.2,
+            onComplete: function() {
+              loadingBack.style.left = '0px'
+            }
+          }
+        )
       }, 3000)
     }
   }
