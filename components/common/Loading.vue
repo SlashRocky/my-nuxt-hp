@@ -73,6 +73,32 @@ export default {
           }
         )
       }
+
+      const loadingFront = document.getElementById('loadingFront')
+      TweenMax.fromTo(
+        loadingFront,
+        1,
+        {
+          x: '-100%',
+          width: 0
+        },
+        {
+          x: '0%',
+          width:
+            windowWidth > 980
+              ? windowWidth - 60 + 'px'
+              : windowWidth - 30 + 'px',
+          ease: Expo.easeInOut,
+          delay: 0.2,
+          onStart: function() {
+            loadingFront.style.width = '0px'
+            loadingFront.style.height =
+              windowWidth > 980
+                ? windowHeight - 60 + 'px'
+                : windowHeight - 30 + 'px'
+          }
+        }
+      )
     },
     finish() {
       const windowWidth = window.innerWidth
@@ -98,6 +124,26 @@ export default {
             delay: 0.2,
             onComplete: function() {
               loadingBack.style.left = '0px'
+            }
+          }
+        )
+
+        TweenMax.fromTo(
+          loadingFront,
+          1,
+          {
+            left: '0%',
+            width:
+              windowWidth > 980
+                ? windowWidth - 60 + 'px'
+                : windowWidth - 30 + 'px'
+          },
+          {
+            left: '120%',
+            width: 0,
+            ease: Expo.easeOut,
+            onComplete: function() {
+              loadingFront.style.left = windowWidth > 980 ? '30px' : '15px'
             }
           }
         )
