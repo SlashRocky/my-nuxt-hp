@@ -18,7 +18,7 @@
 
 <script>
 import LoadingLogo from '~/components/common/LoadingLogo.vue'
-import { TweenMax, Expo } from 'gsap'
+import { TweenMax, TweenLite, Expo } from 'gsap'
 
 export default {
   components: {
@@ -52,6 +52,27 @@ export default {
           }
         }
       )
+
+      const loadingElements = document.getElementsByClassName(
+        'loading__element'
+      )
+      for (let i = 0, l = loadingElements.length; i < l; i++) {
+        let loadingElement = loadingElements[i]
+        TweenLite.fromTo(
+          loadingElement,
+          1,
+          {
+            opacity: 0,
+            visibility: 'hidden',
+            rotation: 0
+          },
+          {
+            opacity: 1,
+            visibility: 'visible',
+            rotation: 180
+          }
+        )
+      }
     },
     finish() {
       const windowWidth = window.innerWidth
