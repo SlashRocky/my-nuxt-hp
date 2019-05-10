@@ -26,6 +26,7 @@ export default {
   },
   methods: {
     start() {
+      const vm = this
       const windowWidth = window.innerWidth
       const windowHeight = window.innerHeight
 
@@ -96,6 +97,7 @@ export default {
               windowWidth > 980
                 ? windowHeight - 60 + 'px'
                 : windowHeight - 30 + 'px'
+            vm.loadingLogoAnim()
           }
         }
       )
@@ -148,6 +150,31 @@ export default {
           }
         )
       }, 3000)
+    },
+    loadingLogoAnim() {
+      const logo = document.getElementById('logo')
+      let paths = []
+      Array.prototype.slice
+        .call(logo.querySelectorAll('path'))
+        .forEach((path, i) => {
+          paths[i] = path
+          paths[i].classList.remove('logo__line--active')
+        })
+
+      let j = 0
+      setTimeout(loadingLogoStrokeAnim, 600)
+      function loadingLogoStrokeAnim() {
+        const logoTicker = setInterval(() => {
+          paths[j].classList.add('logo__line--active')
+          j++
+          if (paths.length === j) {
+            clearInterval(logoTicker)
+            setTimeout(() => {
+              logo.classList.add('logo--active')
+            }, 200)
+          }
+        }, 100)
+      }
     }
   }
 }
