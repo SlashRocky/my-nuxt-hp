@@ -22,6 +22,24 @@ import LoadingLogo from '~/components/common/LoadingLogo.vue'
 export default {
   components: {
     LoadingLogo
+  },
+  methods: {
+    start() {
+      const windowWidth = window.innerWidth
+      const windowHeight = window.innerHeight
+      const loadingMask = document.getElementById('loadingMask')
+      loadingMask.classList.add('is-active')
+      loadingMask.style.height = windowHeight + 'px'
+    },
+    finish() {
+      const windowWidth = window.innerWidth
+      const windowHeight = window.innerHeight
+      const loadingMask = document.getElementById('loadingMask')
+      setTimeout(() => {
+        loadingMask.classList.remove('is-active')
+        loadingMask.style.height = '0px'
+      }, 3000)
+    }
   }
 }
 </script>
