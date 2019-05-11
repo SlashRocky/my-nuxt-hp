@@ -97,7 +97,8 @@ export default {
   data() {
     return {
       showSns: false,
-      showDescription: false
+      showDescription: false,
+      prevPath: ''
     }
   },
   computed: {
@@ -119,8 +120,17 @@ export default {
       this.showDescription = true
     }
   },
+  asyncData(context) {
+    return {
+      prevPath: context.from ? context.from.path : ''
+    }
+  },
   mounted() {
-    this.setLoadedIndex()
+    if (this.prevPath === '/about/') {
+      setTimeout(this.setLoadedIndex, 3000)
+    } else {
+      this.setLoadedIndex()
+    }
   },
   destroyed() {
     this.setUnLoadedIndex()
