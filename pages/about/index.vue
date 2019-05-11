@@ -216,7 +216,7 @@
                         <ul class="slash">
                           <li>HTML5</li>
                           <li>CSS3・SASS・SCSS</li>
-                          <li>JavaScreipt・Vue・Nuxt・Node</li>
+                          <li>JavaScript・Vue・Nuxt・Node</li>
                           <li>GSAP(TweenMax)・CreateJS</li>
                         </ul>
                         <p class="skill-title">
@@ -224,6 +224,7 @@
                         </p>
                         <ul class="slash">
                           <li>WordPress</li>
+                          <li>Headless CMS</li>
                         </ul>
                         <p class="skill-title">
                           サーバー
@@ -360,18 +361,6 @@ export default {
           })
       })
     },
-    sectionCircle01Anim() {
-      const sectionCircle01 = this.$refs.sectionCircle01
-      sectionCircle01.classList.add('is-activeFill')
-    },
-    sectionCircle02Anim() {
-      const sectionCircle02 = this.$refs.sectionCircle02
-      sectionCircle02.classList.add('is-activeFill')
-    },
-    sectionCircle03Anim() {
-      const sectionCircle03 = this.$refs.sectionCircle03
-      sectionCircle03.classList.add('is-activeFill')
-    },
     scrollEvent() {
       const sectionLine = this.$refs.sectionLine
       let sectionLinePosition = sectionLine.getBoundingClientRect().top
@@ -448,10 +437,7 @@ export default {
             .to(sectionJpBk, 1, {
               scaleX: 0,
               transformOrigin: 'right center',
-              ease: Expo.easeIn,
-              onComplete: function() {
-                console.log('test')
-              }
+              ease: Expo.easeIn
             })
         })
       }
@@ -466,7 +452,10 @@ export default {
       ) {
         sectionContent01.classList.add('is-active')
         sectionCircle01.classList.add('is-activeStroke')
-        setTimeout(this.sectionCircle01Anim, 1600)
+        setTimeout(() => {
+          const sectionCircle01 = this.$refs.sectionCircle01
+          sectionCircle01.classList.add('is-activeFill')
+        }, 1600)
       }
 
       const sectionContent02 = this.$refs.sectionContent02
@@ -479,7 +468,10 @@ export default {
       ) {
         sectionContent02.classList.add('is-active')
         sectionCircle02.classList.add('is-activeStroke')
-        setTimeout(this.sectionCircle02Anim, 1600)
+        setTimeout(() => {
+          const sectionCircle02 = this.$refs.sectionCircle02
+          sectionCircle02.classList.add('is-activeFill')
+        }, 1600)
       }
 
       const sectionContent03 = this.$refs.sectionContent03
@@ -492,7 +484,10 @@ export default {
       ) {
         sectionContent03.classList.add('is-active')
         sectionCircle03.classList.add('is-activeStroke')
-        setTimeout(this.sectionCircle03Anim, 1600)
+        setTimeout(() => {
+          const sectionCircle03 = this.$refs.sectionCircle03
+          sectionCircle03.classList.add('is-activeFill')
+        }, 1600)
       }
     }
   }
@@ -598,7 +593,6 @@ header.header {
         top: 0;
         left: 0;
         width: 83px;
-        height: 207px;
       }
     }
   }
@@ -738,6 +732,7 @@ main.main {
           top: 0;
           left: 0;
           height: 100%;
+          width: 15px;
           &:before {
             content: '';
             width: 1px;
