@@ -149,7 +149,11 @@ export default {
     ...mapGetters({
       openedNav: 'openedNav',
       loadedIndex: 'loadedIndex',
-      loadedAbout: 'loadedAbout'
+      loadedAbout: 'loadedAbout',
+      loadedPosts: 'loadedPosts',
+      loadedPost: 'loadedPost',
+      loadedCategories: 'loadedCategories',
+      loadedCategoriesSlug: 'loadedCategoriesSlug'
     })
   },
   watch: {
@@ -159,6 +163,30 @@ export default {
       this.showSwitch = true
     },
     async loadedAbout() {
+      await this.$_delay(3000)
+      this.navButtonBkAnim()
+      await this.$_delay(2000)
+      this.showSwitch = true
+    },
+    async loadedPosts() {
+      await this.$_delay(3000)
+      this.navButtonBkAnim()
+      await this.$_delay(2000)
+      this.showSwitch = true
+    },
+    async loadedPost() {
+      await this.$_delay(3000)
+      this.navButtonBkAnim()
+      await this.$_delay(2000)
+      this.showSwitch = true
+    },
+    async loadedCategories() {
+      await this.$_delay(3000)
+      this.navButtonBkAnim()
+      await this.$_delay(2000)
+      this.showSwitch = true
+    },
+    async loadedCategoriesSlug() {
       await this.$_delay(3000)
       this.navButtonBkAnim()
       await this.$_delay(2000)

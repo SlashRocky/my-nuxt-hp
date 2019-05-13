@@ -105,7 +105,11 @@ export default {
     ...mapGetters({
       openedNav: 'openedNav',
       loadedIndex: 'loadedIndex',
-      loadedAbout: 'loadedAbout'
+      loadedAbout: 'loadedAbout',
+      loadedPosts: 'loadedPosts',
+      loadedPost: 'loadedPost',
+      loadedCategories: 'loadedCategories',
+      loadedCategoriesSlug: 'loadedCategoriesSlug'
     })
   },
   watch: {
@@ -126,7 +130,7 @@ export default {
     }
   },
   mounted() {
-    if (this.prevPath === '/about/') {
+    if (this.prevPath) {
       setTimeout(this.setLoadedIndex, 3000)
     } else {
       this.setLoadedIndex()

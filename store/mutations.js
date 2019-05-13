@@ -13,5 +13,29 @@ export default {
   },
   setUnLoadedAbout(state) {
     state.loadedAbout = false
+  },
+  setLoadedPosts(state) {
+    state.loadedPosts = true
+  },
+  setUnLoadedPosts(state) {
+    state.loadedPosts = false
+  },
+  setLoadedPost(state) {
+    state.loadedPost = true
+  },
+  setUnLoadedPost(state) {
+    state.loadedPost = false
+  },
+  setLoadedCategories(state) {
+    state.loadedCategories = true
+  },
+  setUnLoadedCategories(state) {
+    state.loadedCategories = false
+  },
+  setLoadedCategoriesSlug(state) {
+    state.loadedCategoriesSlug = true
+  },
+  setUnLoadedCategoriesSlug(state) {
+    state.loadedCategoriesSlug = false
   }
 }
