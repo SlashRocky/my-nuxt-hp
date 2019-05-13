@@ -66,6 +66,26 @@
             </nuxt-link>
           </li>
           <li class="nav__list">
+            <nuxt-link
+              id="navLink03"
+              to="/blog/posts/1"
+              class="nav__link nav__link--03"
+              @click.native="click"
+            >
+              <span
+                id="navContainer03"
+                class="nav__container nav__container--03"
+              >
+                <span id="navTxt03" class="nav__txt nav__txt--03">
+                  <span v-for="(text, key) in 'Blog'" :key="`blog-text-${key}`">
+                    {{ text }}
+                  </span>
+                </span>
+                <span ref="navTxtBk03" class="nav__txt__bk"></span>
+              </span>
+            </nuxt-link>
+          </li>
+          <li class="nav__list">
             <a
               id="navLink04"
               href="http://urx2.nu/VpGk"
@@ -150,10 +170,13 @@ export default {
         await this.$_delay(200)
         this.navTxtBk02AnimStart()
         await this.$_delay(200)
+        this.navTxtBk03AnimStart()
+        await this.$_delay(200)
         this.navTxtBk04AnimStart()
       } else {
         this.navTxtBk01AnimSop()
         this.navTxtBk02AnimSop()
+        this.navTxtBk03AnimSop()
         this.navTxtBk04AnimSop()
       }
     }
@@ -267,6 +290,48 @@ export default {
           }
         })
     },
+    navTxtBk03AnimStart() {
+      const navTxtBk03 = this.$refs.navTxtBk03
+      const tlNavTxtBk03 = new TimelineLite()
+      tlNavTxtBk03
+        .fromTo(
+          navTxtBk03,
+          0.4,
+          {
+            width: 0,
+            height: '1px',
+            x: '-150px',
+            y: '-50%'
+          },
+          {
+            width: '61px',
+            height: '1px',
+            x: '0%',
+            y: '-50%',
+            ease: Expo.easeOut,
+            delay: 0.8
+          }
+        )
+        .to(navTxtBk03, 0.7, {
+          height: '24px',
+          ease: Expo.easeOut,
+          onComplete: function() {
+            document.getElementById('navContainer03').classList.add('is-active')
+            document.getElementById('navTxt03').classList.add('is-active')
+          }
+        })
+        .to(navTxtBk03, 0.7, {
+          x: '101%',
+          ease: Expo.easeOut,
+          onComplete: function() {
+            document.getElementById('navLink03').classList.add('is-active')
+            navTxtBk03.removeAttribute('style')
+            document
+              .getElementById('navContainer03')
+              .classList.remove('is-active')
+          }
+        })
+    },
     navTxtBk04AnimStart() {
       const navTxtBk04 = this.$refs.navTxtBk04
       const tlNavTxtBk04 = new TimelineLite()
@@ -320,6 +385,12 @@ export default {
       navTxt02.classList.remove('is-active')
       const navLink02 = document.getElementById('navLink02')
       navLink02.classList.remove('is-active')
+    },
+    navTxtBk03AnimSop() {
+      const navTxt03 = document.getElementById('navTxt03')
+      navTxt03.classList.remove('is-active')
+      const navLink03 = document.getElementById('navLink03')
+      navLink03.classList.remove('is-active')
     },
     navTxtBk04AnimSop() {
       const navTxt04 = document.getElementById('navTxt04')
@@ -520,6 +591,17 @@ export default {
                 }
               }
             }
+            &--03 {
+              &.nuxt-link-exact-active {
+                &.is-active {
+                  &.is-current {
+                    &:before {
+                      animation: 0.4s navCurrent03 0.4s ease-out forwards;
+                    }
+                  }
+                }
+              }
+            }
             &--04 {
               &.nuxt-link-exact-active {
                 &.is-active {
@@ -556,6 +638,13 @@ export default {
                 }
               }
             }
+            &--03 {
+              &:hover {
+                &:before {
+                  animation: 0.4s navCurrent03 0s ease-out forwards;
+                }
+              }
+            }
             &--04 {
               &:hover {
                 &:before {
@@ -571,6 +660,9 @@ export default {
               }
               &--02 {
                 width: 88px;
+              }
+              &--03 {
+                width: 61px;
               }
               &--04 {
                 width: 116px;
@@ -600,6 +692,17 @@ export default {
                       @for $i from 1 through 5 {
                         &:nth-of-type(#{$i}) {
                           animation: 1s navTxt (random(5) * 0.1s) forwards;
+                        }
+                      }
+                    }
+                  }
+                }
+                &--03 {
+                  &.is-active {
+                    span {
+                      @for $i from 1 through 4 {
+                        &:nth-of-type(#{$i}) {
+                          animation: 1s navTxt (random(4) * 0.1s) forwards;
                         }
                       }
                     }
@@ -850,6 +953,12 @@ export default {
 @keyframes navCurrent02 {
   100% {
     right: 30%;
+  }
+}
+
+@keyframes navCurrent03 {
+  100% {
+    right: 50%;
   }
 }
 
