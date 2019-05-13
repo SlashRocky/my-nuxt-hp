@@ -160,6 +160,7 @@ export default {
           paths[i] = path
           paths[i].classList.remove('logo__line--active')
         })
+      logo.classList.remove('logo--active')
 
       let j = 0
       setTimeout(loadingLogoStrokeAnim, 600)
@@ -173,7 +174,7 @@ export default {
               logo.classList.add('logo--active')
             }, 200)
           }
-        }, 100)
+        }, 200)
       }
     }
   }
@@ -240,7 +241,7 @@ export default {
             top: 75%;
             left: (($i - 30) - 1) * 10%;
             @include mq() {
-              display: none;
+              left: (($i - 30) - 1) * 20%;
             }
           } @else if $i < 41 {
             top: 75%;
