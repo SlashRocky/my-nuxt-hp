@@ -25,9 +25,15 @@ export default {
                 id: item.id,
                 title: item.title.rendered,
                 thumbnail: item['_embedded']['wp:featuredmedia']
-                  ? item['_embedded']['wp:featuredmedia'][0]['media_details']['sizes'][params.thumbnailSize]
-                    ? item['_embedded']['wp:featuredmedia'][0]['media_details']['sizes'][params.thumbnailSize]['source_url']
-                    : item['_embedded']['wp:featuredmedia'][0]['media_details']['sizes']['full']['source_url']
+                  ? item['_embedded']['wp:featuredmedia'][0]['media_details'][
+                      'sizes'
+                    ][params.thumbnailSize]
+                    ? item['_embedded']['wp:featuredmedia'][0]['media_details'][
+                        'sizes'
+                      ][params.thumbnailSize]['source_url']
+                    : item['_embedded']['wp:featuredmedia'][0]['media_details'][
+                        'sizes'
+                      ]['full']['source_url']
                   : null,
                 content: item.content.rendered,
                 excerpt: item.excerpt.rendered,
@@ -60,9 +66,15 @@ export default {
               date: data.date,
               title: data.title.rendered,
               thumbnail: data['_embedded']['wp:featuredmedia']
-                ? data['_embedded']['wp:featuredmedia'][0]['media_details']['sizes'][params.thumbnailSize]
-                  ? data['_embedded']['wp:featuredmedia'][0]['media_details']['sizes'][params.thumbnailSize]['source_url']
-                  : data['_embedded']['wp:featuredmedia'][0]['media_details']['sizes']['full']['source_url']
+                ? data['_embedded']['wp:featuredmedia'][0]['media_details'][
+                    'sizes'
+                  ][params.thumbnailSize]
+                  ? data['_embedded']['wp:featuredmedia'][0]['media_details'][
+                      'sizes'
+                    ][params.thumbnailSize]['source_url']
+                  : data['_embedded']['wp:featuredmedia'][0]['media_details'][
+                      'sizes'
+                    ]['full']['source_url']
                 : null,
               category: data.category_name
             }
