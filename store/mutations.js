@@ -37,5 +37,15 @@ export default {
   },
   setUnLoadedCategoriesSlug(state) {
     state.loadedCategoriesSlug = false
+  },
+  updateCategories(state, categories) {
+    state.categories = categories
+  },
+  updatePosts(state, posts) {
+    state.posts = posts
+  },
+  updateMeta(state, meta) {
+    state.meta.title = meta.name
+    state.meta.description = meta.description
   }
 }

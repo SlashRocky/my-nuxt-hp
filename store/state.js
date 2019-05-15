@@ -6,6 +6,9 @@ export default () => {
     loadedPosts: false,
     loadedPost: false,
     loadedCategories: false,
-    loadedCategoriesSlug: false
+    loadedCategoriesSlug: false,
+    categories: [],
+    posts: [],
+    meta: {}
   }
 }
