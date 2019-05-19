@@ -9,7 +9,7 @@
           class="posts__item"
           :class="{ 'is-show': showSwitch }"
         >
-          <nuxt-link :to="`/post/${post.id}`">
+          <nuxt-link :to="`/blog/post/${post.id}`">
             <div class="posts__card">
               <div class="posts__thumbnailWrap">
                 <img
