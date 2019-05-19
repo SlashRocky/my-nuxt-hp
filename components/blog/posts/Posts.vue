@@ -1,7 +1,7 @@
 <template>
   <div class="posts">
+    <PostHeading />
     <div class="posts__inner">
-      <PostHeading />
       <div class="posts__items">
         <div
           v-for="post in posts.data"
@@ -11,10 +11,12 @@
         >
           <nuxt-link :to="`/post/${post.id}`">
             <div class="posts__card">
-              <img
-                :src="post.thumbnail || noImageUrl"
-                class="posts__thumbnail"
-              />
+              <div class="posts__thumbnailWrap">
+                <img
+                  :src="post.thumbnail || noImageUrl"
+                  class="posts__thumbnail"
+                />
+              </div>
               <div class="posts__content">
                 <div class="posts__time">
                   {{ dateFormat(post.date) }}
@@ -168,16 +170,33 @@ export default {
             }
           }
         }
+        &:hover {
+          .posts__thumbnail {
+            transform: scale(1.1);
+            transition-duration: 0.3s;
+            opacity: 0.6;
+          }
+          .posts__time {
+            opacity: 0.6;
+          }
+          .posts__title {
+            opacity: 0.6;
+          }
+        }
       }
       .posts__card {
         border: none;
         box-shadow: 5px 5px 8px 3px rgba(0, 0, 0, 0.1);
-        &:hover {
-          box-shadow: 5px 5px 8px 3px rgba(0, 0, 0, 0.1);
-        }
-        .posts__thumbnail {
+        .posts__thumbnailWrap {
+          overflow: hidden;
           width: 100%;
           height: auto;
+          .posts__thumbnail {
+            display: block;
+            width: 100%;
+            height: auto;
+            transition-duration: 0.3s;
+          }
         }
         .posts__content {
           padding: 15px;
