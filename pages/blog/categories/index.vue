@@ -1,16 +1,24 @@
 <template>
   <div class="categories__id">
     <Nav />
+    <main>
+      <categories title="カテゴリ一覧" />
+    </main>
+    <Footer />
   </div>
 </template>
 
 <script>
+import Categories from '~/components/blog/categories/Categories.vue'
 import Nav from '~/components/common/Nav.vue'
+import Footer from '~/components/common/Footer.vue'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   components: {
-    Nav
+    Categories,
+    Nav,
+    Footer
   },
   computed: {
     ...mapGetters({
@@ -22,6 +30,11 @@ export default {
       loadedCategories: 'loadedCategories',
       loadedCategoriesSlug: 'loadedCategoriesSlug'
     })
+  },
+  head() {
+    return {
+      title: `カテゴリ一覧`
+    }
   },
   mounted() {
     this.setLoadedCategories()
