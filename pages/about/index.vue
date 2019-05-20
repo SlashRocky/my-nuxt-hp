@@ -821,7 +821,7 @@ main.main {
                   a {
                     svg {
                       &:hover {
-                        fill: #3b5998;
+                        fill: #4267b2;
                       }
                     }
                   }

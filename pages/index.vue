@@ -275,7 +275,7 @@ export default {
           }
           svg {
             &:hover {
-              fill: #3b5998;
+              fill: #4267b2;
             }
           }
         }
