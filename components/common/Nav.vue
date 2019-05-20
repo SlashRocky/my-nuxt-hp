@@ -168,29 +168,49 @@ export default {
       await this.$_delay(2000)
       this.showSwitch = true
     },
-    async loadedPosts() {
-      await this.$_delay(3000)
-      this.navButtonBkAnim()
-      await this.$_delay(2000)
-      this.showSwitch = true
+    async loadedPosts(val) {
+      if (val) {
+        this.addCurrentClassToBlog()
+        await this.$_delay(3000)
+        this.navButtonBkAnim()
+        await this.$_delay(2000)
+        this.showSwitch = true
+      } else {
+        this.removeCurrentClassFromBlog()
+      }
     },
-    async loadedPost() {
-      await this.$_delay(3000)
-      this.navButtonBkAnim()
-      await this.$_delay(2000)
-      this.showSwitch = true
+    async loadedPost(val) {
+      if (val) {
+        this.addCurrentClassToBlog()
+        await this.$_delay(3000)
+        this.navButtonBkAnim()
+        await this.$_delay(2000)
+        this.showSwitch = true
+      } else {
+        this.removeCurrentClassFromBlog()
+      }
     },
-    async loadedCategories() {
-      await this.$_delay(3000)
-      this.navButtonBkAnim()
-      await this.$_delay(2000)
-      this.showSwitch = true
+    async loadedCategories(val) {
+      if (val) {
+        this.addCurrentClassToBlog()
+        await this.$_delay(3000)
+        this.navButtonBkAnim()
+        await this.$_delay(2000)
+        this.showSwitch = true
+      } else {
+        this.removeCurrentClassFromBlog()
+      }
     },
-    async loadedCategoriesSlug() {
-      await this.$_delay(3000)
-      this.navButtonBkAnim()
-      await this.$_delay(2000)
-      this.showSwitch = true
+    async loadedCategoriesSlug(val) {
+      if (val) {
+        this.addCurrentClassToBlog()
+        await this.$_delay(3000)
+        this.navButtonBkAnim()
+        await this.$_delay(2000)
+        this.showSwitch = true
+      } else {
+        this.removeCurrentClassFromBlog()
+      }
     },
     async openedNav(val) {
       if (val) {
@@ -425,6 +445,14 @@ export default {
       navTxt04.classList.remove('is-active')
       const navLink04 = document.getElementById('navLink04')
       navLink04.classList.remove('is-active')
+    },
+    addCurrentClassToBlog() {
+      const navLink03 = document.getElementById('navLink03')
+      navLink03.classList.add('is-current', 'nuxt-link-exact-active')
+    },
+    removeCurrentClassFromBlog() {
+      const navLink03 = document.getElementById('navLink03')
+      navLink03.classList.remove('is-current', 'nuxt-link-exact-active')
     }
   }
 }
