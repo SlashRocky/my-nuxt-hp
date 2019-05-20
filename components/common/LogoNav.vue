@@ -139,7 +139,7 @@ export default {
   position: absolute;
   stroke: #333;
   stroke-width: 1.5px;
-  top: 10%;
+  top: 9%;
   right: 5%;
   height: 90vh;
   z-index: 11;
