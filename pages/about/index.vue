@@ -73,11 +73,11 @@
           >
             <div id="sectionLine01" class="section__line">
               <svg
-                viewbox="0 0 18 18"
+                viewbox="0 0 15 15"
                 xmlns="http://www.w3.org/2000/svg"
                 class="section__circle"
               >
-                <circle ref="sectionCircle01" cx="9" cy="9" r="8" />
+                <circle ref="sectionCircle01" cx="7.5" cy="7.5" r="7" />
               </svg>
             </div>
             <div class="section__txt">
@@ -108,6 +108,15 @@
                 <p>
                   1980年生まれ、埼玉県上尾市出身、神奈川県川崎市在住、フロントエンドエンジニア。
                   <br class="pc" />
+                  <a href="https://togo-sec.co.jp/" target="_blanc">
+                    東郷証券株式会社
+                  </a>
+                  のホームページや社内ツールのフロントエンド、
+                  <br class="pc" />
+                  <a href="https://www.bitgate.co.jp/" target="_blanc">
+                    Bitgate株式会社
+                  </a>
+                  のホームページや管理画面等のフロントエンドの制作に携わる。
                 </p>
               </div>
             </div>
@@ -119,11 +128,11 @@
           >
             <div id="sectionLine02" class="section__line">
               <svg
-                viewbox="0 0 18 18"
+                viewbox="0 0 15 15"
                 xmlns="http://www.w3.org/2000/svg"
                 class="section__circle"
               >
-                <circle ref="sectionCircle02" cx="9" cy="9" r="8" />
+                <circle ref="sectionCircle02" cx="7.5" cy="7.5" r="7" />
               </svg>
             </div>
             <div class="section__txt">
@@ -178,11 +187,11 @@
           >
             <div id="sectionLine03" class="section__line">
               <svg
-                viewbox="0 0 18 18"
+                viewbox="0 0 15 15"
                 xmlns="http://www.w3.org/2000/svg"
                 class="section__circle"
               >
-                <circle ref="sectionCircle03" cx="9" cy="9" r="8" />
+                <circle ref="sectionCircle03" cx="7.5" cy="7.5" r="7" />
               </svg>
             </div>
             <div class="section__txt">
@@ -203,7 +212,7 @@
                     </tr>
                     <tr>
                       <th>学歴</th>
-                      <td>埼玉県立浦和高校、 早稲田大学大学商学部卒業。</td>
+                      <td>埼玉県立浦和高等学校、 早稲田大学大学商学部卒業。</td>
                     </tr>
                     <tr>
                       <th class="mg">

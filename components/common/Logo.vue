@@ -69,7 +69,7 @@ export default {
       this.animStopM04()
       this.animStopT01()
       this.animStopT02()
-      await this.$_delay(3500)
+      await this.$_delay(700)
       this.animStartM01()
       this.animStartM03()
       this.animStartT02()
