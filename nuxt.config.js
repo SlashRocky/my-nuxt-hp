@@ -29,7 +29,10 @@ export default {
    */
   loading: '~/components/common/Loading.vue',
   router: {
-    linkActiveClass: 'is-current'
+    linkActiveClass: 'is-current',
+    scrollBehavior: function (to, from, savedPosition) {
+      return { x: 0, y: 0 }
+    }
   },
 
   /*

@@ -17,7 +17,6 @@ import Footer from '~/components/common/Footer.vue'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
-  scrollToTop: true,
   components: {
     PostsHeading,
     Posts,
@@ -52,6 +51,7 @@ export default {
   },
   mounted() {
     this.setLoadedPosts()
+    this.toTop()
   },
   destroyed() {
     this.setUnLoadedPosts()
@@ -60,7 +60,10 @@ export default {
     ...mapMutations({
       setLoadedPosts: 'setLoadedPosts',
       setUnLoadedPosts: 'setUnLoadedPosts'
-    })
+    }),
+    toTop() {
+      window.scrollTo(0, 0)
+    }
   }
 }
 </script>
