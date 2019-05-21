@@ -641,7 +641,7 @@ export default {
                 &.is-active {
                   &.is-current {
                     &:before {
-                      animation: 0.4s navCurrent02 0.4s ease-out forwards;
+                      animation: 0.4s navCurrent02 0.2s ease-out forwards;
                     }
                   }
                 }
@@ -652,7 +652,7 @@ export default {
                 &.is-active {
                   &.is-current {
                     &:before {
-                      animation: 0.4s navCurrent03 0.4s ease-out forwards;
+                      animation: 0.4s navCurrent03 0s ease-out forwards;
                     }
                   }
                 }
@@ -663,7 +663,7 @@ export default {
                 &.is-active {
                   &.is-current {
                     &:before {
-                      animation: 0.4s navCurrent04 0.4s ease-out forwards;
+                      animation: 0.4s navCurrent04 0s ease-out forwards;
                     }
                   }
                 }

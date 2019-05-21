@@ -73,10 +73,10 @@ export default {
         this.animStartM01()
         this.animStartM03()
         this.animStartT02()
-        await this.$_delay(650)
+        await this.$_delay(750)
         this.animStartM02()
         this.animStartM04()
-        await this.$_delay(650)
+        await this.$_delay(750)
         this.animStartT01()
       }
     }
