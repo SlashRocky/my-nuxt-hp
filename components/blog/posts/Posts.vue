@@ -1,7 +1,16 @@
 <template>
   <div class="posts">
-    <PostHeading />
     <div class="posts__inner">
+      <div
+        v-if="type === 'posts' || type === 'slug'"
+        id="postsCategoriesButtonWrap"
+        class="posts__categoriesButtonWrap"
+        :class="{ 'is-show': showSwitch }"
+      >
+        <nuxt-link to="/blog/categories/" class="posts__categoriesButton">
+          カテゴリ一覧を見る
+        </nuxt-link>
+      </div>
       <div class="posts__items">
         <div
           v-for="post in posts.data"
@@ -21,6 +30,11 @@
                 <div class="posts__time">
                   {{ dateFormat(post.date) }}
                 </div>
+                <div class="posts__category">
+                  <nuxt-link :to="`/blog/categories/${post.category}/1`">
+                    {{ post.category }}
+                  </nuxt-link>
+                </div>
                 <div class="posts__title">
                   {{ post.title }}
                 </div>
@@ -29,19 +43,26 @@
           </nuxt-link>
         </div>
       </div>
-      <div v-if="type === 'index'" class="posts__buttonContainer">
-        <button class="posts__button" @click="toAllPosts">
-          全記事見る
-        </button>
-      </div>
-      <div v-else-if="type === 'posts'" class="posts__pager">
-        <button v-if="page !== 1" class="posts__button" @click="prevPage">
+      <div v-if="type === 'posts'" class="posts__pager">
+        <button v-if="page !== 1" class="posts__button" @click="prevPostsPage">
           Prev
         </button>
         <button
           v-if="page < posts.totalPages"
           class="posts__button"
-          @click="nextPage"
+          @click="nextPostsPage"
+        >
+          Next
+        </button>
+      </div>
+      <div v-else-if="type === 'slug'" class="posts__pager">
+        <button v-if="page !== 1" class="posts__button" @click="prevSlugPage">
+          Prev
+        </button>
+        <button
+          v-if="page < posts.totalPages"
+          class="posts__button"
+          @click="nextSlugPage"
         >
           Next
         </button>
@@ -51,13 +72,9 @@
 </template>
 
 <script>
-import PostHeading from '~/components/blog/posts/PostsHeading.vue'
 import { mapGetters, mapState, mapActions } from 'vuex'
 
 export default {
-  components: {
-    PostHeading
-  },
   props: {
     title: {
       type: String,
@@ -93,12 +110,17 @@ export default {
   },
   computed: {
     ...mapGetters({
-      loadedPosts: 'loadedPosts'
+      loadedPosts: 'loadedPosts',
+      loadedCategoriesSlug: 'loadedCategoriesSlug'
     }),
     ...mapState(['categories', 'posts'])
   },
   watch: {
     async loadedPosts() {
+      await this.$_delay(4000)
+      this.showSwitch = true
+    },
+    async loadedCategoriesSlug() {
       await this.$_delay(4000)
       this.showSwitch = true
     }
@@ -121,14 +143,17 @@ export default {
   },
   methods: {
     ...mapActions(['fetchCategories', 'fetchPosts']),
-    toAllPosts() {
-      this.$router.push('/blog/posts/1')
-    },
-    prevPage() {
+    prevPostsPage() {
       this.$router.push(`/blog/posts/${this.page - 1}`)
     },
-    nextPage() {
+    nextPostsPage() {
       this.$router.push(`/blog/posts/${this.page + 1}`)
+    },
+    prevSlugPage() {
+      this.$router.push(`/blog/categories/${this.catSlug}/${this.page - 1}`)
+    },
+    nextSlugPage() {
+      this.$router.push(`/blog/categories/${this.catSlug}/${this.page + 1}`)
     },
     dateFormat(date) {
       return this.$_dateFormat(date)
@@ -147,6 +172,41 @@ export default {
     max-width: 1140px;
     padding: 60px 30px 30px;
     margin: 0 auto;
+    position: relative;
+    .posts__categoriesButtonWrap {
+      &.is-show {
+        .posts__categoriesButton {
+          animation: 0.5s itemShow 2.35s ease-out forwards;
+        }
+      }
+      .posts__categoriesButton {
+        position: absolute;
+        top: -2rem;
+        right: 1.1rem;
+        cursor: pointer;
+        display: block;
+        width: 174px;
+        white-space: nowrap;
+        border-radius: 0.1875rem;
+        line-height: 1.5;
+        text-align: center;
+        transition: 0.2s ease-out;
+        background-color: #afadcb;
+        color: #ffffff;
+        font-size: 14px;
+        box-shadow: 0 8px 16px rgba(19, 15, 64, 0.15);
+        border: 1px solid transparent;
+        font-size: 14px;
+        padding: 0.6rem 1.5rem;
+        margin: 1rem;
+        outline: none;
+        opacity: 0;
+        &:hover {
+          color: #454545;
+          background: #ffffff;
+        }
+      }
+    }
     .posts__items {
       display: flex;
       justify-content: space-between;
@@ -176,12 +236,6 @@ export default {
             transition-duration: 0.3s;
             opacity: 0.6;
           }
-          .posts__time {
-            opacity: 0.6;
-          }
-          .posts__title {
-            opacity: 0.6;
-          }
         }
       }
       .posts__card {
@@ -203,8 +257,19 @@ export default {
           .posts__time {
             display: inline-block;
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 400;
             margin-bottom: 7px;
+          }
+          .posts__category {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 400;
+            margin-bottom: 7px;
+            margin-left: 20px;
+            transition: 0.3s ease-in-out;
+            &:hover {
+              opacity: 0.5;
+            }
           }
           .posts__title {
             line-height: 1.5;
@@ -213,7 +278,6 @@ export default {
         }
       }
     }
-    .posts__buttonContainer,
     .posts__pager {
       text-align: center;
       margin-bottom: 30px;

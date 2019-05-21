@@ -2,6 +2,7 @@
   <div class="categories__id">
     <Nav />
     <main>
+      <posts-heading type="categories" />
       <categories title="カテゴリ一覧" />
     </main>
     <Footer />
@@ -9,6 +10,7 @@
 </template>
 
 <script>
+import PostsHeading from '~/components/blog/posts/PostsHeading.vue'
 import Categories from '~/components/blog/categories/Categories.vue'
 import Nav from '~/components/common/Nav.vue'
 import Footer from '~/components/common/Footer.vue'
@@ -16,6 +18,7 @@ import { mapGetters, mapMutations } from 'vuex'
 
 export default {
   components: {
+    PostsHeading,
     Categories,
     Nav,
     Footer

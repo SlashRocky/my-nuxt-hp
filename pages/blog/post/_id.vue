@@ -10,6 +10,11 @@
           <div class="post__time">
             {{ dateFormat(post.date) }}
           </div>
+          <div class="post__category">
+            <nuxt-link :to="`/blog/categories/${post.category}/1`">
+              {{ post.category }}
+            </nuxt-link>
+          </div>
           <h1 class="post__title">
             {{ post.title }}
           </h1>
@@ -128,10 +133,16 @@ export default {
         .post__time {
           display: inline-block;
           font-size: 11px;
-          font-weight: 700;
+          font-weight: 400;
           margin-bottom: 0.5rem;
           text-align: left;
-          color: #b1b1b1;
+        }
+        .post__category {
+          a {
+            &:hover {
+              opacity: 0.5;
+            }
+          }
         }
         .post__title {
           line-height: 1.5;

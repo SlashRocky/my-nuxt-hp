@@ -1,7 +1,8 @@
 <template>
-  <div class="posts__id">
+  <div id="postsId" class="posts__id">
     <Nav />
     <main>
+      <posts-heading type="posts" />
       <posts title="記事一覧" type="posts" :page="page" :per-page="perPage" />
     </main>
     <Footer />
@@ -9,13 +10,16 @@
 </template>
 
 <script>
+import PostsHeading from '~/components/blog/posts/PostsHeading.vue'
 import Posts from '~/components/blog/posts/Posts.vue'
 import Nav from '~/components/common/Nav.vue'
 import Footer from '~/components/common/Footer.vue'
 import { mapGetters, mapMutations } from 'vuex'
 
 export default {
+  scrollToTop: true,
   components: {
+    PostsHeading,
     Posts,
     Nav,
     Footer

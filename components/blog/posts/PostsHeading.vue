@@ -13,13 +13,41 @@
               </span>
             </h2>
           </div>
-          <div class="section__container section__container02">
+          <div
+            v-if="type === 'posts'"
+            class="section__container section__container02"
+          >
             <h2 ref="sectionJp" class="section__jp">
               <div ref="sectionJpBk" class="bk"></div>
               <span
                 v-for="(text, key) in '記事一覧'"
                 :key="`blog-text-jp-${key}`"
               >
+                {{ text }}
+              </span>
+            </h2>
+          </div>
+          <div
+            v-else-if="type === 'categories'"
+            class="section__container section__container02"
+          >
+            <h2 ref="sectionJp" class="section__jp">
+              <div ref="sectionJpBk" class="bk"></div>
+              <span
+                v-for="(text, key) in 'カテゴリ一覧'"
+                :key="`blog-text-jp-${key}`"
+              >
+                {{ text }}
+              </span>
+            </h2>
+          </div>
+          <div
+            v-else-if="type === 'slug'"
+            class="section__container section__container02"
+          >
+            <h2 ref="sectionJp" class="section__jp">
+              <div ref="sectionJpBk" class="bk"></div>
+              <span v-for="(text, key) in title" :key="`blog-text-jp-${key}`">
                 {{ text }}
               </span>
             </h2>
@@ -34,6 +62,16 @@
 import { mapGetters } from 'vuex'
 
 export default {
+  props: {
+    title: {
+      type: String,
+      default: ''
+    },
+    type: {
+      type: String,
+      default: 'index'
+    }
+  },
   data() {
     return {
       showSwitch: false
@@ -41,11 +79,25 @@ export default {
   },
   computed: {
     ...mapGetters({
-      loadedPosts: 'loadedPosts'
+      loadedPosts: 'loadedPosts',
+      loadedCategories: 'loadedCategories',
+      loadedCategoriesSlug: 'loadedCategoriesSlug'
     })
   },
   watch: {
     async loadedPosts() {
+      await this.$_delay(3000)
+      this.sectionLineAnim()
+      this.blogTxtEnBkAnim()
+      this.blogTxtJpBkAnim()
+    },
+    async loadedCategories() {
+      await this.$_delay(3000)
+      this.sectionLineAnim()
+      this.blogTxtEnBkAnim()
+      this.blogTxtJpBkAnim()
+    },
+    async loadedCategoriesSlug() {
       await this.$_delay(3000)
       this.sectionLineAnim()
       this.blogTxtEnBkAnim()
@@ -201,7 +253,7 @@ export default {
           overflow: hidden;
           position: relative;
           letter-spacing: -1.4px;
-          width: 56px;
+          width: 85px;
           .bk {
             position: absolute;
             top: 0;

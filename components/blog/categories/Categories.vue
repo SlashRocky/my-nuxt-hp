@@ -1,6 +1,5 @@
 <template>
   <div class="categories">
-    <CategoriesHeading />
     <div class="categories__inner">
       <div class="categories__items">
         <div
@@ -9,7 +8,7 @@
           class="categories__item"
           :class="{ 'is-show': showSwitch }"
         >
-          <nuxt-link :to="`/blog/categories/${category.slug}`">
+          <nuxt-link :to="`/blog/categories/${category.slug}/1`">
             <div class="categories__card">
               <div class="categories__thumbnailWrap">
                 <img
@@ -36,13 +35,9 @@
 </template>
 
 <script>
-import CategoriesHeading from '~/components/blog/categories/CategoriesHeading.vue'
 import { mapGetters, mapState, mapActions } from 'vuex'
 
 export default {
-  components: {
-    CategoriesHeading
-  },
   props: {
     title: {
       type: String,
