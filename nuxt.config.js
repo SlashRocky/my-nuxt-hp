@@ -7,7 +7,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: 'MasaakiTodoroki.me - 川崎市在住のフロントエンドエンジニア',
+    title: 'MasaakiTodoroki - 川崎市在住のフロントエンドエンジニア',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -78,13 +78,30 @@ export default {
       }
     }
   },
+  generate: {
+    interval: 500,
+    routes: () => {
+      return Promise
+        .all([
+          axios.get(`${config.default.endpoint}/wp/v2/post_all_id`)
+        ])
+        .then(data => {
+          const posts = data[0]
+          return posts.data
+            .map(post => {
+              return {
+                route: '/post/' + post.id,
+                payload: post
+              }
+            })
+        })
+    }
+  },
   manifest: {
-    name: 'MasaakiTodoroki.me',
+    name: 'MasaakiTodoroki',
     short_name: 'MT',
-    title: 'MasaakiTodoroki.me',
-    'og:title': 'MasaakiTodoroki.me',
+    title: 'MasaakiTodoroki',
     description: '川崎市在住のフロントエンドエンジニア',
-    'og:description': '川崎市在住のフロントエンドエンジニア',
     lang: 'ja',
     theme_color: '#ffffff',
     background_color: '#ffffff'
