@@ -78,25 +78,25 @@ export default {
       }
     }
   },
-  generate: {
-    interval: 500,
-    routes: () => {
-      return Promise
-        .all([
-          axios.get(`${config.default.endpoint}/wp/v2/post_all_id`)
-        ])
-        .then(data => {
-          const posts = data[0]
-          return posts.data
-            .map(post => {
-              return {
-                route: '/post/' + post.id,
-                payload: post
-              }
-            })
-        })
-    }
-  },
+  // generate: {
+  //   interval: 500,
+  //   routes: () => {
+  //     return Promise
+  //       .all([
+  //         axios.get(`${config.default.endpoint}/wp/v2/post_all_id`)
+  //       ])
+  //       .then(data => {
+  //         const posts = data[0]
+  //         return posts.data
+  //           .map(post => {
+  //             return {
+  //               route: '/post/' + post.id,
+  //               payload: post
+  //             }
+  //           })
+  //       })
+  //   }
+  // },
   manifest: {
     name: 'MasaakiTodoroki',
     short_name: 'MT',
