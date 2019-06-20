@@ -91,10 +91,7 @@
                 <span v-for="(text, key) in 'I\'m'" :key="`im-text-${key}`">
                   {{ text }}
                 </span>
-                <span
-                  v-for="(text, key) in 'FrontEnd'"
-                  :key="`frontend-text-${key}`"
-                >
+                <span v-for="(text, key) in 'Web'" :key="`web-text-${key}`">
                   {{ text }}
                 </span>
                 <span
@@ -106,17 +103,7 @@
               </h3>
               <div class="section__description">
                 <p>
-                  1980年生まれ、埼玉県上尾市出身、神奈川県川崎市在住、フロントエンドエンジニア。
-                  <br class="pc" />
-                  <a href="https://togo-sec.co.jp/" target="_blanc">
-                    東郷証券株式会社
-                  </a>
-                  のホームページや社内ツールのフロントエンド、
-                  <br class="pc" />
-                  <a href="https://www.bitgate.co.jp/" target="_blanc">
-                    Bitgate株式会社
-                  </a>
-                  のホームページや管理画面等のフロントエンドの制作に携わる。
+                  1980年生まれ、埼玉県上尾市出身、神奈川県川崎市在住、Webエンジニア。
                 </p>
               </div>
             </div>
