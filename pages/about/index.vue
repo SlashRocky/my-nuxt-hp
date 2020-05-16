@@ -226,9 +226,17 @@
                           サーバー
                         </p>
                         <ul class="slash mgb-0">
+                          <li>AWS</li>
                           <li>Netlify</li>
                           <li>Heroku</li>
                           <li>Rental Server</li>
+                        </ul>
+                        <p class="skill-title">
+                          Infrastructure as Code
+                        </p>
+                        <ul class="slash mgb-0">
+                          <li>AWS CloudFormation</li>
+                          <li>Terraform</li>
                         </ul>
                         <p class="skill-title">
                           ソースコード管理
@@ -237,10 +245,16 @@
                           <li>Git・GitHub</li>
                         </ul>
                         <p class="skill-title">
+                          タスク管理
+                        </p>
+                        <ul class="slash">
+                          <li>Backlog</li>
+                        </ul>
+                        <p class="skill-title">
                           エディタ
                         </p>
                         <ul class="slash">
-                          <li>iTerm2・Zsh・VSCode</li>
+                          <li>iTerm2・VSCode</li>
                         </ul>
                         <p class="skill-title">
                           デザインツール
@@ -253,6 +267,8 @@
                         </p>
                         <ul class="slash">
                           <li>Slack</li>
+                          <li>Chatwork</li>
+                          <li>Discord</li>
                         </ul>
                       </td>
                     </tr>
@@ -262,6 +278,7 @@
                         <ul class="normal">
                           <li>音楽鑑賞</li>
                           <li>楽器演奏</li>
+                          <li>料理</li>
                         </ul>
                       </td>
                     </tr>
