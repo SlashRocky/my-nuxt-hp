@@ -53,7 +53,7 @@
         >
           <p>
             <span
-              v-for="(text, key) in '川崎市在住の'"
+              v-for="(text, key) in '神奈川県川崎市在住の'"
               :key="`address-text-${key}`"
               class="logo__description-l01"
             >
@@ -62,7 +62,7 @@
           </p>
           <p>
             <span
-              v-for="(text, key) in 'フロントエンドエンジニア'"
+              v-for="(text, key) in 'Webエンジニア'"
               :key="`profession-text-${key}`"
               class="logo__description-l02"
             >
