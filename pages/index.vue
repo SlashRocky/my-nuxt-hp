@@ -338,7 +338,7 @@ export default {
       p {
         span {
           &.logo__description-l01 {
-            @for $i from 1 through 6 {
+            @for $i from 1 through 10 {
               &:nth-of-type(#{$i}) {
                 animation: 1s
                   logoDescription
@@ -348,7 +348,7 @@ export default {
             }
           }
           &.logo__description-l02 {
-            @for $i from 1 through 12 {
+            @for $i from 1 through 8 {
               &:nth-of-type(#{$i}) {
                 animation: 1s
                   logoDescription
