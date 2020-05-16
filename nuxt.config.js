@@ -7,7 +7,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: 'MasaakiTodoroki - 川崎市在住のフロントエンドエンジニア',
+    title: 'MasaakiTodoroki - Webエンジニア',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -15,13 +15,21 @@ export default {
       { property: 'og:locale', content: 'ja_JP' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/earlyaccess/notosansjp.css' }
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico'
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600'
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/earlyaccess/notosansjp.css'
+      }
     ],
-    script:[
-      {src:'/js/easeljs-0.8.2.min.js'}
-    ]
+    script: [{ src: '/js/easeljs-0.8.2.min.js' }]
   },
 
   /*
@@ -48,9 +56,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    '@nuxtjs/style-resources'
-  ],
+  modules: ['@nuxtjs/style-resources'],
   /*
    ** style-resources module configuration
    */
@@ -101,7 +107,7 @@ export default {
     name: 'MasaakiTodoroki',
     short_name: 'MT',
     title: 'MasaakiTodoroki',
-    description: '川崎市在住のフロントエンドエンジニア',
+    description: '神奈川県川崎市在住のWebエンジニア',
     lang: 'ja',
     theme_color: '#ffffff',
     background_color: '#ffffff'
