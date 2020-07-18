@@ -38,7 +38,7 @@ export default {
   loading: '~/components/common/Loading.vue',
   router: {
     linkActiveClass: 'is-current',
-    scrollBehavior: function (to, from, savedPosition) {
+    scrollBehavior: function(to, from, savedPosition) {
       return { x: 0, y: 0 }
     }
   },
@@ -51,7 +51,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/mixin'],
+  plugins: ['~/plugins/mixin', { src: '~plugins/ga.js', mode: 'client' }],
 
   /*
    ** Nuxt.js modules
