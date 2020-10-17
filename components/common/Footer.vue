@@ -4,7 +4,7 @@
     <div class="footer__copy">
       <p class="jos">
         <span>©</span>
-        <span v-for="(text, key) in '2019'" :key="`year-text-${key}`">
+        <span v-for="(text, key) in '2020'" :key="`year-text-${key}`">
           {{ text }}
         </span>
         <span
