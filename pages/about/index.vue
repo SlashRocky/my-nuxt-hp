@@ -103,7 +103,7 @@
               </h3>
               <div class="section__description">
                 <p>
-                  1980年生まれ、埼玉県上尾市出身、神奈川県川崎市在住、Webエンジニア。
+                  1980年生まれ、埼玉県上尾市出身、神奈川県川崎市在住、Web系エンジニア。
                 </p>
               </div>
             </div>
@@ -239,22 +239,36 @@
                           <li>Terraform</li>
                         </ul>
                         <p class="skill-title">
-                          ソースコード管理
+                          ソースコード管理ツール
                         </p>
                         <ul class="slash">
                           <li>Git・GitHub</li>
                         </ul>
                         <p class="skill-title">
-                          タスク管理
+                          タスク管理ツール
                         </p>
                         <ul class="slash">
                           <li>Backlog</li>
                         </ul>
                         <p class="skill-title">
+                          コミュニケーションツール
+                        </p>
+                        <ul class="slash">
+                          <li>Slack</li>
+                          <li>Chatwork</li>
+                          <li>Discord</li>
+                        </ul>
+                        <p class="skill-title">
                           エディタ
                         </p>
                         <ul class="slash">
-                          <li>iTerm2・VSCode</li>
+                          <li>VSCode</li>
+                        </ul>
+                        <p class="skill-title">
+                          ターミナル
+                        </p>
+                        <ul class="slash">
+                          <li>iTerm2</li>
                         </ul>
                         <p class="skill-title">
                           デザインツール
@@ -263,12 +277,10 @@
                           <li>Sketch</li>
                         </ul>
                         <p class="skill-title">
-                          コミュニケーション
+                          保有資格
                         </p>
                         <ul class="slash">
-                          <li>Slack</li>
-                          <li>Chatwork</li>
-                          <li>Discord</li>
+                          <li>AWSソリューションアーキテクト</li>
                         </ul>
                       </td>
                     </tr>
