@@ -53,18 +53,9 @@
         >
           <p>
             <span
-              v-for="(text, key) in '神奈川県川崎市在住の'"
+              v-for="(text, key) in '神奈川県川崎市在住のWeb系エンジニア'"
               :key="`address-text-${key}`"
               class="logo__description-l01"
-            >
-              {{ text }}
-            </span>
-          </p>
-          <p>
-            <span
-              v-for="(text, key) in 'Webエンジニア'"
-              :key="`profession-text-${key}`"
-              class="logo__description-l02"
             >
               {{ text }}
             </span>
@@ -338,17 +329,7 @@ export default {
       p {
         span {
           &.logo__description-l01 {
-            @for $i from 1 through 10 {
-              &:nth-of-type(#{$i}) {
-                animation: 1s
-                  logoDescription
-                  ((random(19) * 0.1s) + 2s)
-                  forwards;
-              }
-            }
-          }
-          &.logo__description-l02 {
-            @for $i from 1 through 8 {
+            @for $i from 1 through 19 {
               &:nth-of-type(#{$i}) {
                 animation: 1s
                   logoDescription
